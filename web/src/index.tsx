@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./assets/index.css";
 import App from "./components/app/App";
+import "./assets/variables.css";
+import Theme from "./pages/theme/Theme";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
