@@ -1,0 +1,49 @@
+button.button {
+	background: none;
+	cursor: pointer;
+	outline: inherit;
+    font-family: inherit;
+}
+
+.button {
+    font-size: var(--button-font-size);
+    padding: var(--button-padding);
+    border-style: solid;
+    border-width: var(--border-width);
+    border-radius: var(--border-radius);
+    color: var(--button-font-color);
+    text-shadow: var(--text-shadow);
+    transition: var(--transition);
+    margin-bottom: var(--button-height);
+}
+
+.button.default {
+    background-color: var(--color-medium-grey);
+    border-color: var(--color-dark-grey);
+    box-shadow: 0 var(--button-height) var(--color-dark-grey);
+}
+
+.button.default.disabled {
+    color: var(--color-dark-grey);
+}
+
+.button.blue {
+    background-color: var(--color-medium-blue);
+    border-color: var(--color-dark-blue);
+    box-shadow: 0 var(--button-height) var(--color-dark-blue);
+}
+
+.button.blue.disabled {
+    color: var(--color-dark-blue);
+}
+
+.button.disabled, .button:active {
+    box-shadow: none;
+    transform: translateY(var(--button-height));
+    background-color: var(--color-light-grey);
+}
+
+.button.disabled {
+    cursor: not-allowed;
+    text-shadow: none;
+}
