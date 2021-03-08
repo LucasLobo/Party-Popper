@@ -1,3 +1,7 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-bitwise */
 /* eslint-disable no-console */
 import * as http from 'http';
 
@@ -8,19 +12,35 @@ const app = express();
 app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`));
 
 app.listen(9091, () => console.log('Listening on http port 9091'));
-const websocketServer = require('websocket').server;
+const WebsocketServer = require('websocket').server;
 
 const httpServer = http.createServer();
 httpServer.listen(9090, () => console.log('Listening.. on 9090'));
 
 // hashmap clients
-const clients = {};
-const games = {};
+// const clients = {};
+interface Game {
+  gameId: {
+      id: string,
+      // total no of position
+      position?: number,
+      clients: string[],
+      state?: {},
+  }
+}
+const games = {} as Game;
+interface Client {
+  clientId: {
+      connection?: {},
+  }
+}
 
-const wsServer = new websocketServer({
+const clients = {} as Client;
+
+const wsServer = new WebsocketServer({
   httpServer
 });
-wsServer.on('request', request => {
+wsServer.on('request', (request: { accept: (arg0: null, arg1: any) => any; origin: any; }) => {
   // connect
   const connection = request.accept(null, request.origin);
   connection.on('open', () => console.log('opened!'));
@@ -32,7 +52,7 @@ wsServer.on('request', request => {
     if (result.method === 'create') {
       const { clientId } = result;
       const gameId = guid();
-      games[gameId] = {
+      games.gameId = {
         id: gameId,
         // total no of position
         position: 20,
@@ -42,52 +62,53 @@ wsServer.on('request', request => {
       // payload
       const payLoad = {
         method: 'create',
-        game: games[gameId]
+        game: games.gameId
       };
-
-      const con = clients[clientId].connection;
-      con.send(JSON.stringify(payLoad));
+      clients.clientId.connection = connection;
+      clients.clientId.connection.send(JSON.stringify(payLoad));
+      // con.send(JSON.stringify(payLoad));
     }
 
     // a client want to join
     if (result.method === 'join') {
       const { clientId } = result;
       const { gameId } = result;
-      const game = games[gameId];
-      if (game.clients.length >= 100) {
+      // const game = games.gameId;
+      if (games.gameId.clients.length >= 100) {
         // sorry max players reach
         return;
       }
-      game.clients.push({
+      games.gameId.clients.push(
         clientId
-      });
+      );
       // start the game
-      if (game.clients.length === 2) updateGameState();
+      if (games.gameId.clients.length === 2) updateGameState();
 
       const payLoad = {
         method: 'join',
-        game
+        game: games.gameId
       };
-      // loop through all clients and inform that people has joined
-      game.clients.forEach(c => {
-        clients[c.clientId].connection.send(JSON.stringify(payLoad));
+      // loop through all clients and inform t hat people has joined
+      games.gameId.clients.forEach(el => {
+        const con = clients[el].clientId.connection = connection; 
+        con.send(JSON.stringify(payLoad));
       });
     }
     // a user plays
     if (result.method === 'play') {
       const { gameId } = result;
 
-      let { state } = games[gameId];
+      let { state } = games.gameId;
       if (!state) state = {};
 
-      games[gameId].state = state;
+      games.gameId.state = state;
     }
   });
 
   // generate a new clientId add metadata
   const clientId = guid();
-  clients[clientId] = {
-    connection,
+  clients.clientId = {
+    connection
   };
 
   const payLoad = {
@@ -101,14 +122,14 @@ wsServer.on('request', request => {
 function updateGameState() {
   // {"gameid", fsfhgdjh}
   for (const g of Object.keys(games)) {
-    const game = games[g];
+    // const game = games.g;
     const payLoad = {
       method: 'update',
-      game
+      game: games[g]
     };
 
-    game.clients.forEach(c => {
-      clients[c.clientId].connection.send(JSON.stringify(payLoad));
+    games[g]clients.forEach(c => {
+      clients.c.clientId.connection.send(JSON.stringify(payLoad));
     });
   }
 
