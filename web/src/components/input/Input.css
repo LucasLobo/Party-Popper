@@ -1,0 +1,45 @@
+input[type="input"].input {
+    height: auto;
+}
+
+input[type="input"].input:focus {
+    outline: none;
+}
+
+.input {
+    font-family: 'Bebas Neue', cursive;
+    font-size: var(--button-font-size);
+    padding: var(--button-padding);
+    border-style: solid;
+    border-width: var(--border-width);
+    border-radius: var(--border-radius);
+    color: var(--button-font-color);
+    text-shadow: var(--text-shadow);
+    transition: var(--transition);
+}
+
+.input.default {
+    background-color: var(--color-medium-grey);
+    border-color: var(--color-dark-grey);
+}
+
+.input.default::placeholder {
+    color: var(--color-light-grey);
+}
+
+.input.default.disabled {
+    color: var(--color-dark-grey);
+}
+
+.input.blue {
+    background-color: var(--color-medium-blue);
+    border-color: var(--color-dark-blue);
+}
+
+.input.blue::placeholder {
+    color: var(--color-light-blue);
+}
+
+.input.blue.disabled {
+    color: var(--color-dark-blue);
+}

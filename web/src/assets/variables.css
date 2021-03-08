@@ -1,0 +1,24 @@
+:root {
+    --border-width: 0.1rem;
+    --border-radius: 0.3rem;
+
+    --transition: all 0.1s ease-in-out;
+    --text-shadow: 0 0.05rem black;
+
+
+    /* BUTTON COMPONENT */
+    --button-font-color: white;
+    --button-font-size: 1rem;
+    --button-padding: 0.5rem 1rem;
+    --button-height: 0.4rem;
+
+
+    /* COLORS */
+    --color-dark-grey: hsl(0, 0%, 22%);
+    --color-medium-grey: hsl(0, 0%, 33%);
+    --color-light-grey: hsl(0, 0%, 44%);
+
+    --color-dark-blue: hsl(236, 84%, 33%);
+    --color-medium-blue: hsl(236, 84%, 55%);
+    --color-light-blue: hsl(236, 84%, 77%);
+}
