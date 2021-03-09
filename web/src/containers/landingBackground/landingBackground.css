@@ -1,0 +1,14 @@
+.background-gradient {
+    /*
+        Variables are defined right along style declarations.
+        They're indicated by the double-hyphen prefix.
+      */
+    --color-1: indigo;
+    --color-2: purple;
+    margin: 0;
+    height: 100vh;
+    /*
+        You can access variables using the 'var()' function:
+      */
+    background: linear-gradient(170deg, var(--color-1), var(--color-2));
+  }

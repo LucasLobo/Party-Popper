@@ -37,12 +37,7 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <button
-      className={classes}
-      disabled={disabled}
-      onClick={handleClick}
-      type="button"
-    >
+    <button className={classes} disabled={disabled} onClick={handleClick} type="button">
       {label}
     </button>
   );
