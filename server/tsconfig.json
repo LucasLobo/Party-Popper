@@ -5,6 +5,7 @@
       "outDir": "./dist",
       "strict": true,
       "sourceMap": true,
+      "esModuleInterop": true,
       "baseUrl": ".",
       "typeRoots": [
           "node_modules/@types"
