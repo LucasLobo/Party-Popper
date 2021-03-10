@@ -1,24 +1,72 @@
 :root {
-    --border-width: 0.1rem;
-    --border-radius: 0.3rem;
+  --border-width: 0.1rem;
+  --border-radius: 0.3rem;
 
-    --transition: all 0.1s ease-in-out;
-    --text-shadow: 0 0.05rem black;
+  --transition: all 0.1s ease-in-out;
+  --text-shadow: 0 0.05rem rgba(0, 0, 0, 0.25);
 
+  /* BUTTON COMPONENT */
+  --button-font-color: white;
+  --button-font-size: 1rem;
+  --button-padding: 0.5rem 1rem;
+  --button-3d-height: 0.4rem;
 
-    /* BUTTON COMPONENT */
-    --button-font-color: white;
-    --button-font-size: 1rem;
-    --button-padding: 0.5rem 1rem;
-    --button-height: 0.4rem;
+  /* HEADER */
+  --header-font-color: white;
+  --header-font-size: 1rem;
+  --header-padding: 0.5rem 1rem;
+  --header-3d-height: 0.4rem;
 
+  /* FIELD */
+  --field-font-color: white;
+  --field-font-size: 1.25rem;
+  --field-padding: 0.25rem;
+  --field-3d-height: 0.4rem;
+  --field-finish-checker-background-color: var(--color-grey-70);
+  --field-finish-checker-color: var(--color-grey-30);
+  --field-finish-checker-size: 1rem;
 
-    /* COLORS */
-    --color-dark-grey: hsl(0, 0%, 22%);
-    --color-medium-grey: hsl(0, 0%, 33%);
-    --color-light-grey: hsl(0, 0%, 44%);
+  --field-people-font-color: white;
+  --field-people-border-color: var(--color-grey-60);
+  --field-people-background-color: var(--color-grey-80);
 
-    --color-dark-blue: hsl(236, 84%, 33%);
-    --color-medium-blue: hsl(236, 84%, 55%);
-    --color-light-blue: hsl(236, 84%, 77%);
+  /* COLORS */
+
+  --color-grey-10: hsl(0, 0%, 10%);
+  --color-grey-20: hsl(0, 0%, 20%);
+  --color-grey-30: hsl(0, 0%, 30%);
+  --color-grey-40: hsl(0, 0%, 40%);
+  --color-grey-50: hsl(0, 0%, 50%);
+  --color-grey-60: hsl(0, 0%, 60%);
+  --color-grey-70: hsl(0, 0%, 70%);
+  --color-grey-80: hsl(0, 0%, 80%);
+  --color-grey-90: hsl(0, 0%, 90%);
+
+  --color-dark-grey: var(--color-grey-20);
+  --color-medium-grey: var(--color-grey-30);
+  --color-light-grey: var(--color-grey-50);
+
+  --color-dark-blue: hsl(187, 72%, 33%);
+  --color-medium-blue: hsl(187, 72%, 55%);
+  --color-light-blue: hsl(187, 72%, 77%);
+
+  --color-dark-green: hsl(119, 42%, 33%);
+  --color-medium-green: hsl(119, 42%, 55%);
+  --color-light-green: hsl(119, 42%, 77%);
+
+  --color-dark-red: hsl(0, 81%, 33%);
+  --color-medium-red: hsl(0, 81%, 55%);
+  --color-light-red: hsl(0, 81%, 77%);
+
+  --color-dark-purple: hsl(295, 78%, 33%);
+  --color-medium-purple: hsl(295, 78%, 55%);
+  --color-light-purple: hsl(295, 78%, 77%);
+
+  --color-dark-orange: hsl(29, 97%, 33%);
+  --color-medium-orange: hsl(29, 97%, 55%);
+  --color-light-orange: hsl(29, 97%, 77%);
+
+  --color-dark-yellow: hsl(43, 100%, 33%);
+  --color-medium-yellow: hsl(43, 100%, 55%);
+  --color-light-yellow: hsl(43, 100%, 77%);
 }

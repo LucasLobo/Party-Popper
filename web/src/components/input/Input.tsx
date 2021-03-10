@@ -14,7 +14,7 @@ interface InputProps {
 
 const allowedColors = ["default", "blue"];
 
-const Input: React.FC<InputProps> = ({
+const Input: React.VFC<InputProps> = ({
   placeholder,
   className,
   disabled = false,

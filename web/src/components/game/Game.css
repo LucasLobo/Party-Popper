@@ -1,0 +1,41 @@
+.game {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.field-people {
+  margin: auto;
+  width: 90%;
+
+  border-style: solid;
+  border-width: var(--border-width);
+  border-radius: var(--border-radius);
+
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  text-shadow: var(--text-shadow);
+  background-color: var(--field-people-background-color);
+  border-color: var(--field-people-border-color);
+  color: var(--field-people-font-color);
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.field-people img {
+  height: 1rem;
+  padding: 0.2rem;
+  filter: drop-shadow(0 0 0.03rem rgba(0, 0, 0, 0.6));
+}
+
+.temp-button {
+  position: absolute;
+  left: 37%;
+  bottom: 0;
+  background-color: red;
+  color: white;
+  border: 2px solid black;
+}

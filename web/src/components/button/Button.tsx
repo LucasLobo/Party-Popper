@@ -11,7 +11,7 @@ interface ButtonProps {
 
 const allowedColors = ["default", "blue"];
 
-const Button: React.FC<ButtonProps> = ({
+const Button: React.VFC<ButtonProps> = ({
   className,
   label,
   onClick,
