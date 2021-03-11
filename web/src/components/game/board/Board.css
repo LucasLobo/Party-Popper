@@ -1,0 +1,12 @@
+.board {
+  flex-grow: 1;
+  overflow-y: scroll;
+  padding: 0.5rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.board > div:not(:last-child) {
+  margin-bottom: 0.5rem;
+}

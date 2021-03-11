@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: var(--header-padding);
+  font-size: var(--header-font-size);
+  color: var(--header-font-color);
+  text-shadow: var(--text-shadow);
+
+  margin-bottom: calc(var(--header-3d-height) - 1px);
+  border-bottom: var(--border-width) solid var(--color-dark-grey);
+
+  background-color: var(--color-medium-grey);
+  box-shadow: 0 var(--header-3d-height) var(--color-dark-grey);
+}
