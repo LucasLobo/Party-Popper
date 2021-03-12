@@ -1,0 +1,107 @@
+.dice-container {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 25%);
+}
+
+.dice-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dice-buttons > button {
+  margin: 0.5rem;
+}
+
+.scene {
+  width: calc(2 * var(--cube-size));
+  height: calc(2 * var(--cube-size));
+  perspective: calc(6 * var(--cube-size));
+  margin-bottom: 2rem;
+}
+
+.scene * {
+  box-sizing: border-box;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(calc(-1 * var(--cube-size)));
+  transition: transform 500ms;
+}
+
+.cube__face {
+  position: absolute;
+  width: calc(2 * var(--cube-size));
+  height: calc(2 * var(--cube-size));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(1 * var(--cube-size));
+  color: white;
+  /* border-radius: calc(2 * var(--border-radius)); */
+  border-width: calc(0.075 * var(--cube-size));
+  border-style: solid;
+  /* border-color: var(--color-dark-grey) !important; */
+}
+
+.cube__face--five {
+  transform: rotateY(0deg) translateZ(calc(1 * var(--cube-size)));
+  background-color: var(--color-medium-blue);
+  border-color: var(--color-dark-blue);
+}
+.cube__face--two {
+  transform: rotateY(90deg) translateZ(calc(1 * var(--cube-size)));
+  background-color: var(--color-medium-red);
+  border-color: var(--color-dark-red);
+}
+.cube__face--six {
+  transform: rotateY(180deg) translateZ(calc(1 * var(--cube-size)));
+  background-color: var(--color-medium-green);
+  border-color: var(--color-dark-green);
+}
+.cube__face--one {
+  transform: rotateY(-90deg) translateZ(calc(1 * var(--cube-size)));
+  background-color: var(--color-medium-orange);
+  border-color: var(--color-dark-orange);
+}
+.cube__face--three {
+  transform: rotateX(90deg) translateZ(calc(1 * var(--cube-size)));
+  background-color: var(--color-medium-purple);
+  border-color: var(--color-dark-purple);
+}
+.cube__face--four {
+  transform: rotateX(-90deg) translateZ(calc(1 * var(--cube-size)));
+  background-color: var(--color-medium-yellow);
+  border-color: var(--color-dark-yellow);
+}
+
+.cube.show-five {
+  transform: translateZ(calc(-1 * var(--cube-size))) rotateY(0deg);
+}
+.cube.show-two {
+  transform: translateZ(calc(-1 * var(--cube-size))) rotateY(-90deg);
+}
+.cube.show-six {
+  transform: translateZ(calc(-1 * var(--cube-size))) rotateY(-180deg);
+}
+.cube.show-one {
+  transform: translateZ(calc(-1 * var(--cube-size))) rotateY(90deg);
+}
+.cube.show-three {
+  transform: translateZ(calc(-1 * var(--cube-size))) rotateX(-90deg);
+}
+.cube.show-four {
+  transform: translateZ(calc(-1 * var(--cube-size))) rotateX(90deg);
+}

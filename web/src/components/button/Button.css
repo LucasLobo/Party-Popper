@@ -17,6 +17,8 @@ button.button {
   margin-bottom: var(--button-3d-height);
 }
 
+/* Colors */
+
 .button.default {
   background-color: var(--color-medium-grey);
   border-color: var(--color-dark-grey);
@@ -37,14 +39,36 @@ button.button {
   color: var(--color-dark-blue);
 }
 
-.button.disabled,
-.button:active {
-  box-shadow: none;
-  transform: translateY(var(--button-3d-height));
-  background-color: var(--color-light-grey);
+.button.red {
+  background-color: var(--color-medium-red);
+  border-color: var(--color-dark-red);
+  box-shadow: 0 var(--button-3d-height) var(--color-dark-red);
 }
 
+.button.red.disabled {
+  color: var(--color-dark-red);
+}
+
+.button.green {
+  background-color: var(--color-medium-green);
+  border-color: var(--color-dark-green);
+  box-shadow: 0 var(--button-3d-height) var(--color-dark-green);
+}
+
+.button.green.disabled {
+  color: var(--color-dark-green);
+}
+
+/* Active */
+
 .button.disabled {
+  box-shadow: none;
+  transform: translateY(var(--button-3d-height));
   cursor: not-allowed;
   text-shadow: none;
+}
+
+.button:active {
+  transform: translateY(var(--button-3d-height));
+  box-shadow: none;
 }

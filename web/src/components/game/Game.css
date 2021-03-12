@@ -1,40 +1,38 @@
+.game-container {
+  position: relative;
+}
+
 .game {
   display: flex;
   height: 100vh;
   flex-direction: column;
 }
 
-.field-people {
-  margin: auto;
-  width: 90%;
-
-  border-style: solid;
-  border-width: var(--border-width);
-  border-radius: var(--border-radius);
-
-  border-bottom: none;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-
-  text-shadow: var(--text-shadow);
-  background-color: var(--field-people-background-color);
-  border-color: var(--field-people-border-color);
-  color: var(--field-people-font-color);
-
-  display: flex;
-  justify-content: space-evenly;
+.challenge-active {
+  filter: blur(3px);
+  background-color: rgba(0, 0, 0, 100%);
 }
 
-.field-people img {
-  height: 1rem;
-  padding: 0.2rem;
-  filter: drop-shadow(0 0 0.03rem rgba(0, 0, 0, 0.6));
+.challenge-active-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 20%);
+  z-index: 0;
+}
+
+.temp-button-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  bottom: 0;
 }
 
 .temp-button {
-  position: absolute;
-  left: 37%;
-  bottom: 0;
   background-color: red;
   color: white;
   border: 2px solid black;
