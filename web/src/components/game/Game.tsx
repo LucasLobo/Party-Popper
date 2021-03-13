@@ -17,6 +17,11 @@ const Game: React.VFC = () => {
   const [isChallenge, setIsChallenge] = useState<boolean>(false);
   const [isDice, setIsDice] = useState<boolean>(false);
 
+  const processDiceResult: (diceFace: string) => void = (diceFace) => {
+    console.log(diceFace);
+    setIsDice(false);
+  };
+
   const doSomething: () => void = () => {
     movePlayer(6732, 1);
   };
@@ -61,20 +66,20 @@ const Game: React.VFC = () => {
           </button>
         </div>
       </div>
-      {isChallenge && (
-        <Challenge
-          description={description}
-          outcome={outcome}
-          color="green"
-          onClose={() => setIsChallenge(false)}
-          title="never have i ever"
-        />
-      )}
-      {isDice && (
-        <Dice
-          resultCallback={(diceFace) => console.log(diceFace)}
-          closeCallback={() => setIsDice(false)}
-        />
+
+      {(isChallenge || isDice) && (
+        <div className="overlay-container">
+          {isChallenge && (
+            <Challenge
+              description={description}
+              outcome={outcome}
+              color="green"
+              onClose={() => setIsChallenge(false)}
+              title="never have i ever"
+            />
+          )}
+          {isDice && <Dice resultCallback={processDiceResult} />}
+        </div>
       )}
     </div>
   );

@@ -26,19 +26,17 @@ const Challenge: React.VFC<ChallengeProps> = ({
   };
 
   return (
-    <div className="challenge-container">
-      <div className="challenge">
-        <Header className="challenge-header" color={color} title={title} />
-        <div className="challenge-body">
-          <p className="challenge-description">{description}</p>
-          <p className="challenge-outcome">{outcome}</p>
-          <Button
-            className="challenge-button"
-            color="green"
-            label="next"
-            onClick={delayedClose}
-          />
-        </div>
+    <div className="challenge">
+      <Header className="challenge-header" color={color} title={title} />
+      <div className="challenge-body">
+        <p className="challenge-description">{description}</p>
+        <p className="challenge-outcome">{outcome}</p>
+        <Button
+          className="challenge-button"
+          color="green"
+          label="next"
+          onClick={delayedClose}
+        />
       </div>
     </div>
   );

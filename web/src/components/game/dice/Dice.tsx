@@ -6,7 +6,6 @@ import Button from "../../button/Button";
 
 interface DiceProps {
   resultCallback: (diceFace: string) => void;
-  closeCallback: () => void;
 }
 
 function getRandomInt(min: number, max: number) {
@@ -31,7 +30,7 @@ const getRandomFace = (oldDiceFace: string) => {
   return options[randInt];
 };
 
-const Dice: React.VFC<DiceProps> = ({ resultCallback, closeCallback }) => {
+const Dice: React.VFC<DiceProps> = ({ resultCallback }) => {
   const [diceFace, setDiceFace] = useState<string>(getRandomFace(""));
 
   let rotations = 8;
@@ -43,7 +42,9 @@ const Dice: React.VFC<DiceProps> = ({ resultCallback, closeCallback }) => {
       setDiceFace(newDiceFace);
       setTimeout(rotateDice, 700);
     } else {
-      resultCallback(newDiceFace);
+      setTimeout(() => {
+        resultCallback(newDiceFace);
+      }, 700);
     }
   };
 
@@ -59,10 +60,7 @@ const Dice: React.VFC<DiceProps> = ({ resultCallback, closeCallback }) => {
           <div className="cube__face cube__face--four">4</div>
         </div>
       </div>
-      <div className="dice-buttons">
-        <Button label="Rotate" color="green" onClick={rotateDice} />
-        <Button label="Close" color="red" onClick={closeCallback} />
-      </div>
+      <Button label="Roll" color="green" onClick={rotateDice} />
     </div>
   );
 };
