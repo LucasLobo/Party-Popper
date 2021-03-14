@@ -1,8 +1,8 @@
-input[type="input"].input {
+input[type="text"].input {
     height: auto;
 }
 
-input[type="input"].input:focus {
+input[type="text"].input:focus {
     outline: none;
 }
 
@@ -16,10 +16,15 @@ input[type="input"].input:focus {
     color: var(--button-font-color);
     text-shadow: var(--text-shadow);
     transition: var(--transition);
+    width: 95%;
+    height: calc(20px + 6vh);
+    margin-top: 20px;
+
+
 }
 
 .input.default {
-    background-color: var(--color-medium-grey);
+    /* background-color: var(--color-medium-grey); */
     border-color: var(--color-dark-grey);
 }
 
