@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./assets/index.css";
 import Game from "./components/game/Game";
+import LandingPage from "./pages/landingPage";
 import "./assets/variables.css";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Game />
+    {/* <Game /> */}
+    <LandingPage />
   </React.StrictMode>,
   document.getElementById("root")
 );
