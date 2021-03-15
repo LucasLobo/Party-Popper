@@ -1,0 +1,6 @@
+.header-text {
+  color: white;
+  text-align: center;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  text-shadow: var(--text-shadow);
+}

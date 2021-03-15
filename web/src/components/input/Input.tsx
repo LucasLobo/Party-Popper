@@ -9,7 +9,7 @@ interface InputProps {
   className?: string;
   color?: string;
   value?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const allowedColors = ["default", "blue", "light"];

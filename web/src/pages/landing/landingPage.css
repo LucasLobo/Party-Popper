@@ -1,7 +1,7 @@
 .header-text {
   color: white;
   text-align: center;
-  padding: 0.5em;
+  padding: 0.5rem 0.5rem 0 0.5rem;
   text-shadow: var(--text-shadow);
 }
 
@@ -12,4 +12,9 @@
 .landing-button {
   margin: 0 0 1rem 0;
   width: 100%;
+}
+
+.landing-avatar-container {
+  height: 50vmin;
+  width: 50vmin;
 }

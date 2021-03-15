@@ -15,7 +15,9 @@ const JoinPage: React.VFC = () => {
     <LandingBackground>
       <h1 className="header-text">Party Popper</h1>
       <LandingContainer>
-        <CircleAvatar name={avatar} />
+        <div className="landing-avatar-container">
+          <CircleAvatar name={avatar} />
+        </div>
         <p className="joinpage-nickname">{nickname}</p>
 
         <Input

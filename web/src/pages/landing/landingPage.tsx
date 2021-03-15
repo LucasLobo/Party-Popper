@@ -92,7 +92,9 @@ const LandingPage: React.VFC = () => {
     <LandingBackground>
       <h1 className="header-text">Party Popper</h1>
       <LandingContainer>
-        <CircleAvatar name={avatars[avatarIndex]} onReload={nextIndex} />
+        <div className="landing-avatar-container">
+          <CircleAvatar name={avatars[avatarIndex]} onReload={nextIndex} />
+        </div>
         <Input
           className="landing-input"
           placeholder="Nickname"

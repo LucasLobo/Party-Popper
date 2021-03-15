@@ -98,6 +98,18 @@
       "name": "ema",
       "avatar": "turtle",
       "position": 0
+    },
+    {
+      "id": 4112,
+      "name": "beth",
+      "avatar": "boar",
+      "position": 0
+    },
+    {
+      "id": 4195,
+      "name": "rick",
+      "avatar": "clownfish",
+      "position": 0
     }
   ]
 }
