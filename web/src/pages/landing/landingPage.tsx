@@ -10,17 +10,17 @@ import avatars from "../../assets/avatars";
 
 interface LandingProps {
   nickname: string;
-  avatarIndex: number;
+  avatar: string;
   setNickame: Dispatch<SetStateAction<string>>;
-  setAvatarIndex: Dispatch<SetStateAction<number>>;
+  nextAvatar: Dispatch<SetStateAction<void>>;
   setGenerateCode: Dispatch<SetStateAction<string>>;
 }
 
 const LandingPage: React.VFC<LandingProps> = ({
   nickname,
   setNickame,
-  avatarIndex,
-  setAvatarIndex,
+  avatar,
+  nextAvatar,
   setGenerateCode,
 }) => {
   const generateCode: () => string = () => {
@@ -35,15 +35,12 @@ const LandingPage: React.VFC<LandingProps> = ({
   };
 
   const history = useHistory();
-  const nextIndex = () => {
-    setAvatarIndex((avatarIndex + 1) % avatars.length);
-  };
 
   return (
     <LandingBackground>
       <h1 className="header-text">Party Popper</h1>
       <LandingContainer>
-        <CircleAvatar name={avatars[avatarIndex]} onReload={nextIndex} />
+        <CircleAvatar name={avatar} onReload={nextAvatar} />
         <Input
           className="landing-input"
           placeholder="Nickname"

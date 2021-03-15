@@ -4,17 +4,11 @@ import Game from "./components/game/Game";
 import LandingPage from "./pages/landing/landingPage";
 import JoinPage from "./pages/joinPage/joinPage";
 import "./assets/variables.css";
-import avatars from "./assets/avatars";
+import useAvatar from "./hooks/useAvatar";
 
-// import "./assets";
-const randIndex: () => number = () => {
-  const min = 0;
-  const max = avatars.length - 1;
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
 const App = () => {
   const [nickname, setNickame] = useState("");
-  const [avatarIndex, setAvatarIndex] = useState(randIndex());
+  const [avatar, nextAvatar] = useAvatar();
   const [code, setGenerateCode] = useState("");
 
   return (
@@ -25,15 +19,15 @@ const App = () => {
             <LandingPage
               nickname={nickname}
               setNickame={setNickame}
-              avatarIndex={avatarIndex}
-              setAvatarIndex={setAvatarIndex}
+              avatar={avatar}
+              nextAvatar={nextAvatar}
               setGenerateCode={setGenerateCode}
             />
           </Route>
           <Route path="/join">
             <JoinPage
               nickname={nickname}
-              avatar={avatars[avatarIndex]}
+              avatar={avatar}
               gameCode={code}
               setGameCode={setGenerateCode}
             />
