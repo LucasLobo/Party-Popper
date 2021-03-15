@@ -7,18 +7,14 @@ import Person from "./person/Person";
 
 import Game from "../../assets/game.json";
 
-const Lobby: React.VFC = () => {
-  const gameCode = "3d90712";
-
+interface LobbyProps {
+  code: string;
+  start: () => void;
+}
+const Lobby: React.VFC<LobbyProps> = ({ code, start }) => {
   return (
     <div className="lobby-container">
-      <Input
-        className="landing-input"
-        placeholder="game code"
-        color="blue"
-        value={gameCode}
-        disabled
-      />
+      <Input placeholder="game code" color="blue" value={code} disabled />
 
       <div className="lobby-people-container">
         {Game.players.map((person) => {
@@ -27,12 +23,11 @@ const Lobby: React.VFC = () => {
           );
         })}
       </div>
-
       <Button
-        color="green"
         label="copy invite code"
-        onClick={() => navigator.clipboard.writeText(gameCode)}
+        onClick={() => navigator.clipboard.writeText(code)}
       />
+      <Button color="green" label="start game" onClick={start} />
     </div>
   );
 };

@@ -86,30 +86,6 @@
       "name": "kate",
       "avatar": "dog",
       "position": 0
-    },
-    {
-      "id": 4466,
-      "name": "oliver",
-      "avatar": "sloth",
-      "position": 0
-    },
-    {
-      "id": 3213,
-      "name": "ema",
-      "avatar": "turtle",
-      "position": 0
-    },
-    {
-      "id": 4112,
-      "name": "beth",
-      "avatar": "boar",
-      "position": 0
-    },
-    {
-      "id": 4195,
-      "name": "rick",
-      "avatar": "clownfish",
-      "position": 0
     }
   ]
 }

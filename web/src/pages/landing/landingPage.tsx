@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useHistory } from "react-router-dom";
 import CircleAvatar from "../../components/circleAvatar/circleAvatar";
 import Button from "../../components/button/Button";
@@ -7,86 +7,43 @@ import "./landingPage.css";
 import LandingContainer from "../../containers/landingContainers/landingContainer";
 import LandingBackground from "../../containers/landingBackground/landingBackground";
 
-const avatars = [
-  "bat",
-  "beaver",
-  "bee",
-  "beetle",
-  "boar",
-  "buffalo",
-  "bullfinch",
-  "butterfly",
-  "camel",
-  "cat",
-  "chameleon",
-  "chicken",
-  "clownfish",
-  "cow",
-  "crab",
-  "crocodile",
-  "deer",
-  "dog",
-  "elephant",
-  "flamingo",
-  "fox",
-  "frog",
-  "giraffe",
-  "gorilla",
-  "hedgehog",
-  "hippo",
-  "horse",
-  "ladybug",
-  "lama",
-  "lion",
-  "mouse",
-  "owl",
-  "panda",
-  "parrot",
-  "penguin",
-  "pig",
-  "platypus",
-  "rabbit",
-  "rhino",
-  "shark",
-  "sheep",
-  "sloth",
-  "snake",
-  "spider",
-  "squid",
-  "stingray",
-  "turtle",
-  "walrus",
-  "whale",
-  "zebra",
-];
-
-interface Person {
-  name?: string;
-  age?: string;
+interface LandingProps {
+  nickname: string;
+  avatar: string;
+  setNickame: Dispatch<SetStateAction<string>>;
+  nextAvatar: Dispatch<SetStateAction<void>>;
+  setCode: Dispatch<SetStateAction<string>>;
 }
 
-const generateCode: () => string = () => {
-  let code = "";
-  const chars =
-    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  for (let i = 9; i > 0; i -= 1) {
-    code += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return code;
-};
-
-const randIndex: () => number = () => {
-  const min = 0;
-  const max = avatars.length - 1;
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-const LandingPage: React.VFC = () => {
-  const [nickname, setNickame] = useState("");
-  const [avatarIndex, setAvatarIndex] = useState(randIndex());
+const LandingPage: React.VFC<LandingProps> = ({
+  nickname,
+  setNickame,
+  avatar,
+  nextAvatar,
+  setCode,
+}) => {
   const history = useHistory();
-  const nextIndex = () => {
-    setAvatarIndex((avatarIndex + 1) % avatars.length);
+
+  const generateCode: () => string = () => {
+    let code = "";
+    const chars =
+      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (let i = 9; i > 0; i -= 1) {
+      code += chars[Math.floor(Math.random() * chars.length)];
+    }
+    setCode(code);
+    return code;
+  };
+
+  const createRoom = () => {
+    if (nickname) {
+      generateCode();
+      history.push("lobby");
+    }
+  };
+
+  const joinRoom = () => {
+    if (nickname) history.push("join");
   };
 
   return (
@@ -94,7 +51,7 @@ const LandingPage: React.VFC = () => {
       <h1 className="header-text">Party Popper</h1>
       <LandingContainer>
         <div className="landing-avatar-container">
-          <CircleAvatar name={avatars[avatarIndex]} onReload={nextIndex} />
+          <CircleAvatar name={avatar} onReload={nextAvatar} />
         </div>
         <Input
           className="landing-input"
@@ -109,19 +66,13 @@ const LandingPage: React.VFC = () => {
           className="landing-button"
           label="Join existing Room"
           color="green"
-          onClick={() => {
-            console.log("something");
-            const path = `join`;
-            history.push(path);
-          }}
+          onClick={joinRoom}
         />
         <Button
           className="landing-button"
           label="Create new Room"
           color="default"
-          onClick={() => {
-            window.alert(`Your invite code is ${generateCode()}`);
-          }}
+          onClick={createRoom}
         />
       </LandingContainer>
     </LandingBackground>

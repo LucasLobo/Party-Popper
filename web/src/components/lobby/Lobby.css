@@ -18,3 +18,7 @@
 .lobby-container .button {
   width: 100%;
 }
+
+.lobby-container .button:not(:last-child) {
+  margin-bottom: 1rem;
+}
