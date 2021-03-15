@@ -41,9 +41,11 @@
 }
 
 .challenge-description {
+  margin-bottom: 1rem;
 }
 
 .challenge-outcome {
-  color: red;
+  color: var(--field-outcome-color);
   font-size: 0.8rem;
+  margin-bottom: 0.5rem;
 }

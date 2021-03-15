@@ -1,27 +1,8 @@
-.child-center-landing {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .flex-center-landing {
-    color: white;
-    margin: 5px;
-    border-radius: 25px;
-    border: 3px;
-    border-style: solid;
-    width: 75%;
-    height: 18em;
-    
-    display: flex;
-    align-items: center;
-    align-items: center;
-  }
-  
-  .flex-center-start-landing {
-    margin: 5px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 80vw;
-  }
+.landing-container {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin: 1rem;
+}

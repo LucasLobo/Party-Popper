@@ -6,7 +6,7 @@ type Props = {
 };
 
 const LandingBackground: React.FC<Props> = ({ children }) => {
-  return <div className="background-gradient">{children}</div>;
+  return <div className="landing-background">{children}</div>;
 };
 
 export default LandingBackground;

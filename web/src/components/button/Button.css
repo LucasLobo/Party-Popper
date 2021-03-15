@@ -3,8 +3,6 @@ button.button {
   cursor: pointer;
   outline: inherit;
   font-family: inherit;
-  width: 60%;
-  margin-top: 2em;
 }
 
 .button {
