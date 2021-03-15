@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
@@ -7,11 +7,20 @@ import "./joinPage.css";
 import LandingContainer from "../../containers/landingContainers/landingContainer";
 import LandingBackground from "../../containers/landingBackground/landingBackground";
 
-const JoinPage: React.VFC = () => {
-  const [gameCode, setGameCode] = useState("");
+interface JoinProps {
+  avatar?: string;
+  nickname?: string;
+  gameCode?: string;
+  setGameCode: Dispatch<SetStateAction<string>>;
+}
+
+const JoinPage: React.VFC<JoinProps> = ({
+  avatar = "fox",
+  nickname = "john",
+  gameCode = "",
+  setGameCode,
+}) => {
   const history = useHistory();
-  const avatar = "fox";
-  const nickname = "John";
 
   return (
     <LandingBackground>

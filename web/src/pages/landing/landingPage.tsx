@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useHistory } from "react-router-dom";
 import CircleAvatar from "../../components/circleAvatar/circleAvatar";
 import Button from "../../components/button/Button";
@@ -60,30 +60,32 @@ const avatars = [
   "zebra",
 ];
 
-interface Person {
-  name?: string;
-  age?: string;
+interface LandingProps {
+  nickname: string;
+  avatarIndex: number;
+  setNickame: Dispatch<SetStateAction<string>>;
+  setAvatarIndex: Dispatch<SetStateAction<number>>;
+  setGenerateCode: Dispatch<SetStateAction<string>>;
 }
 
-const generateCode: () => string = () => {
-  let code = "";
-  const chars =
-    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  for (let i = 9; i > 0; i -= 1) {
-    code += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return code;
-};
+const LandingPage: React.VFC<LandingProps> = ({
+  nickname,
+  setNickame,
+  avatarIndex,
+  setAvatarIndex,
+  setGenerateCode,
+}) => {
+  const generateCode: () => string = () => {
+    let code = "";
+    const chars =
+      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (let i = 9; i > 0; i -= 1) {
+      code += chars[Math.floor(Math.random() * chars.length)];
+    }
+    setGenerateCode(code);
+    return code;
+  };
 
-const randIndex: () => number = () => {
-  const min = 0;
-  const max = avatars.length - 1;
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-const LandingPage: React.VFC = () => {
-  const [nickname, setNickame] = useState("");
-  const [avatarIndex, setAvatarIndex] = useState(randIndex());
   const history = useHistory();
   const nextIndex = () => {
     setAvatarIndex((avatarIndex + 1) % avatars.length);
@@ -108,7 +110,7 @@ const LandingPage: React.VFC = () => {
           label="Join existing Room"
           color="green"
           onClick={() => {
-            console.log("something");
+            console.log(nickname);
             const path = `join`;
             history.push(path);
           }}
@@ -118,7 +120,9 @@ const LandingPage: React.VFC = () => {
           label="Create new Room"
           color="default"
           onClick={() => {
-            window.alert(`Your invite code is ${generateCode()}`);
+            generateCode();
+            const path = `join`;
+            history.push(path);
           }}
         />
       </LandingContainer>
