@@ -3,12 +3,24 @@ import "./Header.css";
 
 interface HeaderProps {
   title: string;
-  secondary: string;
+  secondary?: string;
+  className?: string;
+  color: string;
 }
 
-const Header: React.VFC<HeaderProps> = ({ title, secondary }) => {
+const allowedColors = ["default", "blue", "red", "green"];
+
+const Header: React.VFC<HeaderProps> = ({
+  title,
+  secondary,
+  className,
+  color,
+}) => {
+  const classes = `header ${className} ${
+    secondary ? "header-double" : "header-single"
+  } ${allowedColors.includes(color) ? color : "default"}`;
   return (
-    <div className="header">
+    <div className={classes}>
       <span>{title}</span>
       <span>{secondary}</span>
     </div>

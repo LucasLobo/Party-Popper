@@ -5,6 +5,8 @@
   --transition: all 0.1s ease-in-out;
   --text-shadow: 0 0.05rem rgba(0, 0, 0, 0.25);
 
+  --cube-size: 3rem;
+
   /* BUTTON COMPONENT */
   --button-font-color: white;
   --button-font-size: 1rem;
