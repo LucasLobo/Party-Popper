@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import CircleAvatar from "../../components/circleAvatar/circleAvatar";
@@ -8,6 +9,7 @@ import LandingBackground from "../../containers/landingBackground/landingBackgro
 
 const JoinPage: React.VFC = () => {
   const [gameCode, setGameCode] = useState("");
+  const history = useHistory();
   const avatar = "fox";
   const nickname = "John";
 
@@ -33,6 +35,8 @@ const JoinPage: React.VFC = () => {
           color="green"
           onClick={() => {
             console.log("something");
+            const path = `game`;
+            history.push(path);
           }}
         />
         <Button
@@ -41,6 +45,8 @@ const JoinPage: React.VFC = () => {
           color="default"
           onClick={() => {
             console.log("back");
+            const path = `/`;
+            history.push(path);
           }}
         />
       </LandingContainer>

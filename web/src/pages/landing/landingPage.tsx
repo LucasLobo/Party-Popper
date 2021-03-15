@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import CircleAvatar from "../../components/circleAvatar/circleAvatar";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
@@ -83,7 +84,7 @@ const randIndex: () => number = () => {
 const LandingPage: React.VFC = () => {
   const [nickname, setNickame] = useState("");
   const [avatarIndex, setAvatarIndex] = useState(randIndex());
-
+  const history = useHistory();
   const nextIndex = () => {
     setAvatarIndex((avatarIndex + 1) % avatars.length);
   };
@@ -108,6 +109,8 @@ const LandingPage: React.VFC = () => {
           color="green"
           onClick={() => {
             console.log("something");
+            const path = `join`;
+            history.push(path);
           }}
         />
         <Button
