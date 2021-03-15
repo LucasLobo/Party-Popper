@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useHistory } from "react-router-dom";
 import CircleAvatar from "../../components/circleAvatar/circleAvatar";
 import Button from "../../components/button/Button";
@@ -6,94 +6,41 @@ import Input from "../../components/input/Input";
 import "./landingPage.css";
 import LandingContainer from "../../containers/landingContainers/landingContainer";
 import LandingBackground from "../../containers/landingBackground/landingBackground";
+import avatars from "../../assets/avatars";
 
-const avatars = [
-  "bat",
-  "beaver",
-  "bee",
-  "beetle",
-  "boar",
-  "buffalo",
-  "bullfinch",
-  "butterfly",
-  "camel",
-  "cat",
-  "chameleon",
-  "chicken",
-  "clownfish",
-  "cow",
-  "crab",
-  "crocodile",
-  "deer",
-  "dog",
-  "elephant",
-  "flamingo",
-  "fox",
-  "frog",
-  "giraffe",
-  "gorilla",
-  "hedgehog",
-  "hippo",
-  "horse",
-  "ladybug",
-  "lama",
-  "lion",
-  "mouse",
-  "owl",
-  "panda",
-  "parrot",
-  "penguin",
-  "pig",
-  "platypus",
-  "rabbit",
-  "rhino",
-  "shark",
-  "sheep",
-  "sloth",
-  "snake",
-  "spider",
-  "squid",
-  "stingray",
-  "turtle",
-  "walrus",
-  "whale",
-  "zebra",
-];
-
-interface Person {
-  name?: string;
-  age?: string;
+interface LandingProps {
+  nickname: string;
+  avatar: string;
+  setNickame: Dispatch<SetStateAction<string>>;
+  nextAvatar: Dispatch<SetStateAction<void>>;
+  setGenerateCode: Dispatch<SetStateAction<string>>;
 }
 
-const generateCode: () => string = () => {
-  let code = "";
-  const chars =
-    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  for (let i = 9; i > 0; i -= 1) {
-    code += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return code;
-};
-
-const randIndex: () => number = () => {
-  const min = 0;
-  const max = avatars.length - 1;
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-const LandingPage: React.VFC = () => {
-  const [nickname, setNickame] = useState("");
-  const [avatarIndex, setAvatarIndex] = useState(randIndex());
-  const history = useHistory();
-  const nextIndex = () => {
-    setAvatarIndex((avatarIndex + 1) % avatars.length);
+const LandingPage: React.VFC<LandingProps> = ({
+  nickname,
+  setNickame,
+  avatar,
+  nextAvatar,
+  setGenerateCode,
+}) => {
+  const generateCode: () => string = () => {
+    let code = "";
+    const chars =
+      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (let i = 9; i > 0; i -= 1) {
+      code += chars[Math.floor(Math.random() * chars.length)];
+    }
+    setGenerateCode(code);
+    return code;
   };
+
+  const history = useHistory();
 
   return (
     <LandingBackground>
       <h1 className="header-text">Party Popper</h1>
       <LandingContainer>
-        <CircleAvatar name={avatars[avatarIndex]} onReload={nextIndex} />
+        <CircleAvatar name={avatar} onReload={nextAvatar} />
         <Input
           className="landing-input"
           placeholder="Nickname"
@@ -108,7 +55,7 @@ const LandingPage: React.VFC = () => {
           label="Join existing Room"
           color="green"
           onClick={() => {
-            console.log("something");
+            console.log(nickname);
             const path = `join`;
             history.push(path);
           }}
@@ -118,7 +65,9 @@ const LandingPage: React.VFC = () => {
           label="Create new Room"
           color="default"
           onClick={() => {
-            window.alert(`Your invite code is ${generateCode()}`);
+            generateCode();
+            const path = `join`;
+            history.push(path);
           }}
         />
       </LandingContainer>
