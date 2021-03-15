@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import CircleAvatar from "../../components/circleAvatar/circleAvatar";
@@ -8,6 +9,7 @@ import LandingBackground from "../../containers/landingBackground/landingBackgro
 
 const JoinPage: React.VFC = () => {
   const [gameCode, setGameCode] = useState("");
+  const history = useHistory();
   const avatar = "fox";
   const nickname = "John";
 
@@ -15,13 +17,13 @@ const JoinPage: React.VFC = () => {
     <LandingBackground>
       <h1 className="header-text">Party Popper</h1>
       <LandingContainer>
-        <div className="landing-avatar-container">
+        <div className="join-avatar-container">
           <CircleAvatar name={avatar} />
         </div>
         <p className="joinpage-nickname">{nickname}</p>
 
         <Input
-          className="landing-input"
+          className="join-input"
           placeholder="game code"
           color="light"
           value={gameCode}
@@ -30,19 +32,23 @@ const JoinPage: React.VFC = () => {
           }}
         />
         <Button
-          className="landing-button"
+          className="join-button"
           label="Join"
           color="green"
           onClick={() => {
             console.log("something");
+            const path = `game`;
+            history.push(path);
           }}
         />
         <Button
-          className="landing-button"
+          className="join-button"
           label="back"
           color="default"
           onClick={() => {
             console.log("back");
+            const path = `/`;
+            history.push(path);
           }}
         />
       </LandingContainer>

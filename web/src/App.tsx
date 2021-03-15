@@ -1,6 +1,7 @@
 import React from "react";
-// import Game from "./components/game/Game";
-// import LandingPage from "./pages/landing/landingPage";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Game from "./components/game/Game";
+import LandingPage from "./pages/landing/landingPage";
 import JoinPage from "./pages/joinPage/joinPage";
 import LobbyPage from "./pages/lobbyPage/lobbyPage";
 import "./assets/variables.css";
@@ -10,10 +11,19 @@ import "./assets/variables.css";
 const App = () => {
   return (
     <>
-      {/* <Game /> */}
-      {/* <LandingPage /> */}
-      {/* <JoinPage /> */}
-      <LobbyPage />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route path="/join">
+            <JoinPage />
+          </Route>
+          <Route path="/game">
+            <Game />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </>
   );
 };
