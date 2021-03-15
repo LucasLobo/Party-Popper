@@ -1,6 +1,7 @@
 /* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }] */
 
 import * as React from "react";
+import { useHistory } from "react-router-dom";
 import CircleAvatar from "../components/cirlceavatar/circleAvatar";
 import Button from "../components/button/Button";
 import Input from "../components/input/Input";
@@ -14,6 +15,7 @@ interface Person {
 }
 
 const LandingPage: React.VFC = () => {
+  const history = useHistory();
   return (
     <>
       <LandingBackground>
@@ -37,6 +39,8 @@ const LandingPage: React.VFC = () => {
                 result += chars[Math.floor(Math.random() * chars.length)];
               }
               window.alert(`Your invite code is ${result}`);
+              const path = `game`;
+              history.push(path);
             }}
           />
         </LandingContainer>
