@@ -1,15 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./App";
 import "./assets/index.css";
-import Game from "./components/game/Game";
-import LandingPage from "./pages/landingPage";
-import "./assets/variables.css";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Game /> */}
-    <LandingPage />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
