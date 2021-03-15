@@ -1,5 +1,7 @@
 input[type="text"].input {
     height: auto;
+    max-width: 100%;
+    font-family: 'Bebas Neue', cursive;
 }
 
 input[type="text"].input:focus {
@@ -7,24 +9,18 @@ input[type="text"].input:focus {
 }
 
 .input {
-    font-family: 'Bebas Neue', cursive;
-    font-size: var(--button-font-size);
-    padding: var(--button-padding);
+    font-size: var(--input-font-size);
+    padding: var(--input-padding);
     border-style: solid;
     border-width: var(--border-width);
     border-radius: var(--border-radius);
-    /* color: var(--button-font-color); */
+    color: var(--input-font-color);
     text-shadow: var(--text-shadow);
     transition: var(--transition);
-    width: 95%;
-    height: calc(20px + 6vh);
-    margin-top: 20px;
-
-
 }
 
 .input.default {
-    /* background-color: var(--color-medium-grey); */
+    background-color: var(--color-medium-grey);
     border-color: var(--color-dark-grey);
 }
 
@@ -32,7 +28,7 @@ input[type="text"].input:focus {
     color: var(--color-light-grey);
 }
 
-.input.default.disabled {
+.input.default.disabled, .input.default.disabled::placeholder {
     color: var(--color-dark-grey);
 }
 
@@ -45,6 +41,20 @@ input[type="text"].input:focus {
     color: var(--color-light-blue);
 }
 
-.input.blue.disabled {
+.input.blue.disabled, .input.blue.disabled::placeholder {
     color: var(--color-dark-blue);
+}
+
+.input.light {
+    background-color: white;
+    color: var(--color-grey-40);
+    border-color: var(--color-grey-40);
+}
+
+.input.light::placeholder {
+    color: var(--color-grey-80);
+}
+
+.input.light.disabled, .input.light.disabled::placeholder {
+    color: var(--color-grey-10);
 }

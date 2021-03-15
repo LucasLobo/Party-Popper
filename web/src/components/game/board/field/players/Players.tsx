@@ -9,7 +9,7 @@ interface PlayersProps {
 const maxPlayers = 5;
 
 const getIconPath: (name: string) => string = (name) => {
-  return `/svg/${name}.svg`;
+  return `/svg/avatars/${name}.svg`;
 };
 
 const People: React.VFC<PlayersProps> = ({ players }) => {

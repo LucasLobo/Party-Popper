@@ -7,6 +7,15 @@
 
   --cube-size: 3rem;
 
+  /* LANDING */
+  --landing-gradient-color-1: indigo;
+  --landing-gradient-color-2: purple;
+
+  /* INPUT COMPONENT */
+  --input-font-color: white;
+  --input-font-size: 1rem;
+  --input-padding: 0.5rem 1rem;
+
   /* BUTTON COMPONENT */
   --button-font-color: white;
   --button-font-size: 1rem;
@@ -31,6 +40,8 @@
   --field-people-font-color: white;
   --field-people-border-color: var(--color-grey-60);
   --field-people-background-color: var(--color-grey-80);
+
+  --field-outcome-color: var(--color-medium-red);
 
   /* COLORS */
 

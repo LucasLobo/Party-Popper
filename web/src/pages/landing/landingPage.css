@@ -1,0 +1,15 @@
+.header-text {
+  color: white;
+  text-align: center;
+  padding: 0.5em;
+  text-shadow: var(--text-shadow);
+}
+
+.landing-input {
+  margin: 1rem 0;
+}
+
+.landing-button {
+  margin: 0 0 1rem 0;
+  width: 100%;
+}

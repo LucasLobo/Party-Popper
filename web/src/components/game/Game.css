@@ -34,6 +34,7 @@
 
 .temp-button {
   background-color: red;
+  padding: 0 0.1rem;
   color: white;
   border: 2px solid black;
 }
