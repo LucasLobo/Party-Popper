@@ -20,7 +20,13 @@ const LandingPage: React.VFC = () => {
         <p className="header-text">Party Popper</p>
         <LandingContainer>
           <CircleAvatar url="https://garticphone.com/images/avatar/33.svg" />
-          <Input placeholder="Nick Name" value="" onChange={(_e) => {}} />
+          <Input
+            placeholder="Nick Name"
+            // value=""
+            onChange={(_e) => {
+              console.log("tre");
+            }}
+          />
           <Button
             label="start"
             onClick={() => {

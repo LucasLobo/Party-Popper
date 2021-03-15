@@ -13,7 +13,7 @@ input[type="text"].input:focus {
     border-style: solid;
     border-width: var(--border-width);
     border-radius: var(--border-radius);
-    color: var(--button-font-color);
+    /* color: var(--button-font-color); */
     text-shadow: var(--text-shadow);
     transition: var(--transition);
     width: 95%;

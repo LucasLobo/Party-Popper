@@ -8,7 +8,7 @@ interface InputProps {
   autoComplete?: boolean;
   className?: string;
   color?: string;
-  value: string;
+  // value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -21,7 +21,7 @@ const Input: React.VFC<InputProps> = ({
   readonly = false,
   autoComplete = false,
   color = "default",
-  value,
+  // value,
   onChange,
 }) => {
   const computeClasses: () => string = () => {
@@ -44,7 +44,7 @@ const Input: React.VFC<InputProps> = ({
       readOnly={readonly}
       autoComplete={autoComplete ? "on" : "false"}
       type="text"
-      value={value}
+      // value={value}
       onChange={onChange}
       className={classes}
     />
