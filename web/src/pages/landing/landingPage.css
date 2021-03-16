@@ -11,10 +11,29 @@
 
 .landing-button {
   margin: 0 0 1rem 0;
-  width: 100%;
+  width: calc(85px + 16vw);
+  height: calc(10px + 7vh);
 }
 
 .landing-avatar-container {
   height: 50vmin;
   width: 50vmin;
 }
+
+@media only screen and (max-width: 1030px) {
+  .landing-button {
+    margin: 0 0 1rem 0;
+    width: 60%;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .landing-button {
+    margin: 0 0 1rem 0;
+    width: 100%;
+    height: auto;
+  }
+}
+
+
