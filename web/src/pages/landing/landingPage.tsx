@@ -6,14 +6,13 @@ import Input from "../../components/input/Input";
 import "./landingPage.css";
 import LandingContainer from "../../containers/landingContainers/landingContainer";
 import LandingBackground from "../../containers/landingBackground/landingBackground";
-import avatars from "../../assets/avatars";
 
 interface LandingProps {
   nickname: string;
   avatar: string;
   setNickame: Dispatch<SetStateAction<string>>;
   nextAvatar: Dispatch<SetStateAction<void>>;
-  setGenerateCode: Dispatch<SetStateAction<string>>;
+  setCode: Dispatch<SetStateAction<string>>;
 }
 
 const LandingPage: React.VFC<LandingProps> = ({
@@ -21,8 +20,10 @@ const LandingPage: React.VFC<LandingProps> = ({
   setNickame,
   avatar,
   nextAvatar,
-  setGenerateCode,
+  setCode,
 }) => {
+  const history = useHistory();
+
   const generateCode: () => string = () => {
     let code = "";
     const chars =
@@ -30,17 +31,28 @@ const LandingPage: React.VFC<LandingProps> = ({
     for (let i = 9; i > 0; i -= 1) {
       code += chars[Math.floor(Math.random() * chars.length)];
     }
-    setGenerateCode(code);
+    setCode(code);
     return code;
   };
 
-  const history = useHistory();
+  const createRoom = () => {
+    if (nickname) {
+      generateCode();
+      history.push("lobby");
+    }
+  };
+
+  const joinRoom = () => {
+    if (nickname) history.push("join");
+  };
 
   return (
     <LandingBackground>
       <h1 className="header-text">Party Popper</h1>
       <LandingContainer>
-        <CircleAvatar name={avatar} onReload={nextAvatar} />
+        <div className="landing-avatar-container">
+          <CircleAvatar name={avatar} onReload={nextAvatar} />
+        </div>
         <Input
           className="landing-input"
           placeholder="Nickname"
@@ -54,21 +66,13 @@ const LandingPage: React.VFC<LandingProps> = ({
           className="landing-button"
           label="Join existing Room"
           color="green"
-          onClick={() => {
-            console.log(nickname);
-            const path = `join`;
-            history.push(path);
-          }}
+          onClick={joinRoom}
         />
         <Button
           className="landing-button"
           label="Create new Room"
           color="default"
-          onClick={() => {
-            generateCode();
-            const path = `join`;
-            history.push(path);
-          }}
+          onClick={createRoom}
         />
       </LandingContainer>
     </LandingBackground>

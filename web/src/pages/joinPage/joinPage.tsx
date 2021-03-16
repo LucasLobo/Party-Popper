@@ -8,29 +8,44 @@ import LandingContainer from "../../containers/landingContainers/landingContaine
 import LandingBackground from "../../containers/landingBackground/landingBackground";
 
 interface JoinProps {
-  avatar?: string;
-  nickname?: string;
-  gameCode?: string;
+  avatar: string;
+  nickname: string;
+  gameCode: string;
   setGameCode: Dispatch<SetStateAction<string>>;
 }
 
 const JoinPage: React.VFC<JoinProps> = ({
-  avatar = "fox",
-  nickname = "john",
-  gameCode = "",
+  avatar,
+  nickname,
+  gameCode,
   setGameCode,
 }) => {
   const history = useHistory();
+  if (!nickname) {
+    history.replace("/");
+  }
+
+  const joinRoom = () => {
+    if (gameCode) {
+      history.push("lobby");
+    }
+  };
+
+  const back = () => {
+    history.goBack();
+  };
 
   return (
     <LandingBackground>
       <h1 className="header-text">Party Popper</h1>
       <LandingContainer>
-        <CircleAvatar name={avatar} />
+        <div className="join-avatar-container">
+          <CircleAvatar name={avatar} />
+        </div>
         <p className="joinpage-nickname">{nickname}</p>
 
         <Input
-          className="landing-input"
+          className="join-input"
           placeholder="game code"
           color="light"
           value={gameCode}
@@ -39,24 +54,16 @@ const JoinPage: React.VFC<JoinProps> = ({
           }}
         />
         <Button
-          className="landing-button"
+          className="join-button"
           label="Join"
           color="green"
-          onClick={() => {
-            console.log("something");
-            const path = `game`;
-            history.push(path);
-          }}
+          onClick={joinRoom}
         />
         <Button
-          className="landing-button"
+          className="join-button"
           label="back"
           color="default"
-          onClick={() => {
-            console.log("back");
-            const path = `/`;
-            history.push(path);
-          }}
+          onClick={back}
         />
       </LandingContainer>
     </LandingBackground>

@@ -1,0 +1,24 @@
+.lobby-container {
+  border-style: solid;
+  border-radius: var(--border-radius);
+  border-width: var(--border-width);
+  border-color: var(--color-dark-grey);
+  background-color: white;
+  color: var(--color-dark-grey);
+  box-shadow: 0 var(--button-3d-height) var(--color-dark-grey);
+  margin: 0 1rem var(--button-3d-height) 1rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.lobby-people-container {
+  margin: 0.5rem 0;
+}
+
+.lobby-container .button {
+  width: 100%;
+}
+
+.lobby-container .button:not(:last-child) {
+  margin-bottom: 1rem;
+}
