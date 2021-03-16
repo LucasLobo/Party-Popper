@@ -8,7 +8,9 @@
   box-shadow: 0 var(--button-3d-height) var(--color-dark-grey);
   margin: 0 1rem var(--button-3d-height) 1rem;
   padding: 0.5rem;
-  width: 100%;
+  /* width: 100%; */
+  max-width: 90vw;
+  max-height: 80vh;
 }
 
 .lobby-people-container {

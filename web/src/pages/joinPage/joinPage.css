@@ -11,7 +11,8 @@
 
 .join-button {
   margin-top: 1rem;
-  width: 100%;
+  width: calc(85px + 16vw);
+  height: calc(10px + 7vh);
 }
 
 .joinpage-nickname {
@@ -20,6 +21,29 @@
 }
 
 .join-avatar-container {
-  height: 50vmin;
-  width: 50vmin;
+  height: 25vmin;
+  width: 25vmin;
+}
+
+
+@media only screen and (max-width: 1030px) {
+  .join-avatar-container {
+    height: 40vmin;
+    width: 40vmin; 
+  }
+  .join-button {
+    margin-top: 1rem;
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .join-avatar-container {
+    height: 50vmin;
+    width: 50vmin; 
+  }
+  .join-button {
+    margin-top: 1rem;
+    width: 100%;
+  }
 }
