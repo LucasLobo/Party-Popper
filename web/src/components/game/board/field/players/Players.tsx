@@ -1,9 +1,10 @@
 import React from "react";
 import { IPlayer } from "../../../../../hooks/useBoard";
+import { Player } from "../../../../../models/player";
 import "./Players.css";
 
 interface PlayersProps {
-  players: IPlayer[];
+  players: Player[];
 }
 
 const maxPlayers = 5;
@@ -24,7 +25,7 @@ const People: React.VFC<PlayersProps> = ({ players }) => {
         {players.map((player) => {
           return (
             <img
-              key={player.name}
+              key={player.nickName}
               alt={player.avatar}
               src={getIconPath(player.avatar)}
             />
@@ -40,7 +41,7 @@ const People: React.VFC<PlayersProps> = ({ players }) => {
       {players.slice(0, maxPlayers).map((player) => {
         return (
           <img
-            key={player.name}
+            key={player.nickName}
             alt={player.avatar}
             src={getIconPath(player.avatar)}
           />

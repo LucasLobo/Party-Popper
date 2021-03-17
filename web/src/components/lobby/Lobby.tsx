@@ -16,24 +16,21 @@ interface LobbyProps {
   start: () => void;
 }
 const Lobby: React.VFC<LobbyProps> = ({ code, start }) => {
-  const [players, setPlayers] = usePlayers();
+  const players = usePlayers();
 
-  useEffect(() => {
-    socket.emit(SocketType.PLAYERS, { code });
-  }, [code]);
-
-  useEffect(() => {
-    setInterval(() => {}, 100);
-  }, []);
-
+  console.log(Array.isArray(players));
   return (
     <div className="lobby-container">
       <Input placeholder="game code" color="blue" value={code} disabled />
 
       <div className="lobby-people-container">
-        {Game.players.map((person) => {
+        {players.map((person) => {
           return (
-            <Person key={person.id} name={person.name} avatar={person.avatar} />
+            <Person
+              key={person.playerId}
+              name={person.nickName}
+              avatar={person.avatar}
+            />
           );
         })}
       </div>

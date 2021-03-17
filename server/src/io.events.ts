@@ -37,20 +37,19 @@ export class IoEvents {
 
     // this.io.on(SockeType.CONNECTION, (socket: Socket) => {
     this.socket.on(SockeType.JOINROOM, ({ nickName, code, avatar }) => {
-      connectUser.joinGame(code, nickName, socket.id, avatar);
+      if (code || nickName || avatar) {
+        connectUser.joinGame(code, nickName, socket.id, avatar);
 
-      this.socket.join(code);
-      console.log(nickName, socket.id, code, avatar);
+        this.socket.join(code);
+        console.log(nickName, socket.id, code, avatar);
+        const players = this.gameState.getGamePlayers(code);
 
-      this.socket.broadcast
-        .to(code)
-        .emit(SockeType.NOTIFICATION, `${nickName} has joined the game`);
-    });
+        this.io.to(code).emit(SockeType.JOINROOM, players);
 
-    this.socket.on(SockeType.PLAYERS, ({ code }) => {
-      const players = this.gameState.getGamePlayers(code);
-      console.log(players);
-      this.socket.emit(SockeType.PLAYERS, players);
+        this.socket.broadcast
+          .to(code)
+          .emit(SockeType.NOTIFICATION, `${nickName} has joined the game`);
+      }
     });
 
     this.io.on(SockeType.POSITION, ({ position, playerId }) => {

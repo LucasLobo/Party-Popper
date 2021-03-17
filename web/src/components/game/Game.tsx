@@ -33,11 +33,7 @@ const Game: React.VFC = () => {
           isChallenge || isDice ? "game challenge-active" : ""
         }`}
       >
-        <Header
-          color="default"
-          title={board.players[1].name}
-          secondary={`${board.players[1].position}`}
-        />
+        <Header color="default" title="Hello" secondary="bye" />
         <Board fields={board.fields} />
 
         <div className="temp-button-container">

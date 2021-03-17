@@ -32,20 +32,18 @@ const LobbyPage: React.VFC<LobbyPageProps> = ({ code, nickName, avatar }) => {
   };
 
   useEffect(() => {
-    socket.on(SocketType.CONNECTION, (sockemessage: any) => {
-      console.log(sockemessage);
-    });
+    socket.connect();
 
     socket.emit(SocketType.JOINROOM, { nickName, code, avatar });
 
     socket.on(SocketType.NOTIFICATION, (msg: any) => {
       console.log("hello", msg);
     });
-  }, [code, nickName, avatar]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    setInterval(() => {}, 100);
-  }, []);
+  // useEffect(() => {
+  //   setInterval(() => {}, 100);
+  // }, []);
 
   return (
     <LandingBackground>

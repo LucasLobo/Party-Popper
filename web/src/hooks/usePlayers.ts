@@ -3,34 +3,26 @@ import { Player } from "../models/player";
 import { SocketType } from "../utils/constants";
 import { socket } from "../utils/socket";
 
-export function usePlayers(): Player[] {
-  const [players, setPlayers] = useState<Player[] | null>(null);
-  const socs = useRef<[] | null>(null);
+export function usePlayers(cb?: () => void): Player[] {
+  const [players, setPlayers] = useState<Player[]>([]);
 
-  //   useEffect(() => {});
-
-  setInterval(() => {
-    console.log("interval");
-    socket.on(SocketType.PLAYERS, (soc: any) => {
+  useEffect(() => {
+    socket.on(SocketType.JOINROOM, (soc: any) => {
       console.log("number", soc);
-      socs.current = soc;
-      console.log(socs);
+
+      const pl = soc.map((p: any) => {
+        return new Player(
+          p.gameId,
+          p.nickName,
+          p.playerId,
+          p.avatar,
+          p.position
+        );
+      });
+      setPlayers(pl);
+      cb?.();
     });
-  }, 100);
+  }, []);
 
-  //   const mapped = socs.current!.map((p: any) => {
-  //     const pl = new Player(
-  //       p.gameId,
-  //       p.nickName,
-  //       p.playerId,
-  //       p.avatar,
-  //       p.position
-  //     );
-  //     return pl;
-  //   });
-
-  //   setPlayers(mapped);
-  //   console.log(mapped);
-
-  return [];
+  return players;
 }

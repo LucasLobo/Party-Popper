@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import gameData from "../assets/game.json";
+import { Player } from "../models/player";
+import { usePlayers } from "./usePlayers";
 
 export interface IPlayer {
   id: number;
@@ -13,19 +15,19 @@ export interface IField {
   position: number;
   category: string;
   color: string;
-  players?: IPlayer[];
+  players?: Player[];
 }
 
 export interface IBoard {
   code: number;
   fields: IField[];
-  players: IPlayer[];
-  started: boolean;
 }
 
 function useBoard(): [IBoard, (id: number, amount: number) => boolean] {
-  const [board, setBoard] = useState<IBoard>({ ...gameData, started: false });
-
+  const [board, setBoard] = useState<IBoard>({
+    ...gameData,
+  });
+  let players: Player[] = [];
   const computePlayerFields = () => {
     const { fields } = board;
 
@@ -33,7 +35,7 @@ function useBoard(): [IBoard, (id: number, amount: number) => boolean] {
       board.fields[i].players = [];
     }
 
-    board.players.forEach((player: IPlayer) => {
+    players.forEach((player: Player) => {
       if (fields[player.position].players === undefined) {
         fields[player.position].players = [];
       }
@@ -42,13 +44,12 @@ function useBoard(): [IBoard, (id: number, amount: number) => boolean] {
     setBoard({ ...board, fields: board.fields });
   };
 
-  if (!board.started) {
-    board.started = true;
-    computePlayerFields();
-  }
+  players = usePlayers(computePlayerFields);
 
   const movePlayer = (id: number, amount: number) => {
-    const player = board.players.find((element) => element.id === id);
+    const player = players.find(
+      (element) => element.playerId === id.toString()
+    );
     if (player === undefined || player.position + amount >= board.fields.length)
       return false;
 
