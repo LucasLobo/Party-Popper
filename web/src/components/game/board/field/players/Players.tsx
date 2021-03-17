@@ -1,5 +1,4 @@
 import React from "react";
-import { IPlayer } from "../../../../../hooks/useBoard";
 import { Player } from "../../../../../models/player";
 import "./Players.css";
 

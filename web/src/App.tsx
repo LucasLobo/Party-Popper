@@ -5,12 +5,14 @@ import LandingPage from "./pages/landing/landingPage";
 import JoinPage from "./pages/joinPage/joinPage";
 import "./assets/variables.css";
 import useAvatar from "./hooks/useAvatar";
+import useBoard from "./hooks/useBoard";
 import LobbyPage from "./pages/lobbyPage/lobbyPage";
 
 const App: React.VFC = () => {
   const [nickname, setNickame] = useState("");
   const [avatar, nextAvatar] = useAvatar();
   const [code, setCode] = useState("");
+  const [board, players, movePlayer] = useBoard();
 
   return (
     <BrowserRouter>
@@ -33,10 +35,15 @@ const App: React.VFC = () => {
           />
         </Route>
         <Route path="/lobby">
-          <LobbyPage code={code} nickName={nickname} avatar={avatar} />
+          <LobbyPage
+            code={code}
+            nickName={nickname}
+            avatar={avatar}
+            players={players}
+          />
         </Route>
         <Route path="/game">
-          <Game />
+          <Game board={board} players={players} moveplayer={movePlayer} />
         </Route>
       </Switch>
     </BrowserRouter>

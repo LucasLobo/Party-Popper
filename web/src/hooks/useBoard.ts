@@ -23,11 +23,17 @@ export interface IBoard {
   fields: IField[];
 }
 
-function useBoard(): [IBoard, (id: number, amount: number) => boolean] {
+function useBoard(): [
+  IBoard,
+  Player[],
+  (id: string, amount: number) => boolean
+] {
   const [board, setBoard] = useState<IBoard>({
     ...gameData,
   });
-  let players: Player[] = [];
+
+  const players: Player[] = usePlayers();
+
   const computePlayerFields = () => {
     const { fields } = board;
 
@@ -44,12 +50,8 @@ function useBoard(): [IBoard, (id: number, amount: number) => boolean] {
     setBoard({ ...board, fields: board.fields });
   };
 
-  players = usePlayers(computePlayerFields);
-
-  const movePlayer = (id: number, amount: number) => {
-    const player = players.find(
-      (element) => element.playerId === id.toString()
-    );
+  const movePlayer = (id: string, amount: number) => {
+    const player = players.find((element) => element.playerId === id);
     if (player === undefined || player.position + amount >= board.fields.length)
       return false;
 
@@ -60,7 +62,11 @@ function useBoard(): [IBoard, (id: number, amount: number) => boolean] {
     return true;
   };
 
-  return [board, movePlayer];
+  useEffect(() => {
+    computePlayerFields();
+  }, [players]);
+
+  return [board, players, movePlayer];
 }
 
 export default useBoard;

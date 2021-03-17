@@ -1,15 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Player } from "../models/player";
 import { SocketType } from "../utils/constants";
 import { socket } from "../utils/socket";
 
-export function usePlayers(cb?: () => void): Player[] {
+export function usePlayers(): Player[] {
   const [players, setPlayers] = useState<Player[]>([]);
 
   useEffect(() => {
     socket.on(SocketType.JOINROOM, (soc: any) => {
-      console.log("number", soc);
-
+      console.log("SocketType.JOINROOM", soc);
       const pl = soc.map((p: any) => {
         return new Player(
           p.gameId,
@@ -20,7 +19,6 @@ export function usePlayers(cb?: () => void): Player[] {
         );
       });
       setPlayers(pl);
-      cb?.();
     });
   }, []);
 
