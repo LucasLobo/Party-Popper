@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
+import socketIOClient, { Socket } from "socket.io-client";
+
 import "./lobbyPage.css";
 import LandingContainer from "../../containers/landingContainers/landingContainer";
 import LandingBackground from "../../containers/landingBackground/landingBackground";
 import Lobby from "../../components/lobby/Lobby";
+import { SocketType } from "../../utils/constants";
+import { socket } from "../../utils/socket";
+import { usePlayers } from "../../hooks/usePlayers";
 
 interface LobbyPageProps {
   code: string;
+  nickName: string;
+  avatar: string;
 }
+type Players = {
+  players: [];
+};
 
-const LobbyPage: React.VFC<LobbyPageProps> = ({ code }) => {
+const LobbyPage: React.VFC<LobbyPageProps> = ({ code, nickName, avatar }) => {
   const history = useHistory();
+  const [message, setmessage] = useState<string>("");
+
   if (!code) {
     history.replace("/");
   }
@@ -18,6 +30,22 @@ const LobbyPage: React.VFC<LobbyPageProps> = ({ code }) => {
   const start = () => {
     history.push("/game");
   };
+
+  useEffect(() => {
+    socket.on(SocketType.CONNECTION, (sockemessage: any) => {
+      console.log(sockemessage);
+    });
+
+    socket.emit(SocketType.JOINROOM, { nickName, code, avatar });
+
+    socket.on(SocketType.NOTIFICATION, (msg: any) => {
+      console.log("hello", msg);
+    });
+  }, [code, nickName, avatar]);
+
+  useEffect(() => {
+    setInterval(() => {}, 100);
+  }, []);
 
   return (
     <LandingBackground>

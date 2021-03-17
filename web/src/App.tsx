@@ -33,7 +33,7 @@ const App: React.VFC = () => {
           />
         </Route>
         <Route path="/lobby">
-          <LobbyPage code={code} />
+          <LobbyPage code={code} nickName={nickname} avatar={avatar} />
         </Route>
         <Route path="/game">
           <Game />
