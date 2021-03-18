@@ -5,4 +5,5 @@ export enum SocketType {
   NOTIFICATION = "notification",
   POSITION = "position",
   PLAYERS = "players",
+  READY = "ready",
 }

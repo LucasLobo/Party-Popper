@@ -15,6 +15,7 @@ interface LobbyPageProps {
   avatar: string;
   players: Player[];
   isOwner: boolean;
+  playerId: string;
 }
 
 const LobbyPage: React.VFC<LobbyPageProps> = ({
@@ -23,6 +24,7 @@ const LobbyPage: React.VFC<LobbyPageProps> = ({
   avatar,
   players,
   isOwner,
+  playerId,
 }) => {
   const history = useHistory();
 
@@ -36,14 +38,20 @@ const LobbyPage: React.VFC<LobbyPageProps> = ({
 
   useEffect(() => {
     socket.connect();
-    socket.emit(SocketType.JOINROOM, { nickName, code, avatar });
+    socket.emit(SocketType.JOINROOM, { playerId, nickName, code, avatar });
   }, []);
 
   return (
     <LandingBackground>
       <h1 className="header-text">Party Popper</h1>
       <LandingContainer>
-        <Lobby code={code} start={start} players={players} isOwner={isOwner} />
+        <Lobby
+          code={code}
+          start={start}
+          players={players}
+          isOwner={isOwner}
+          playerId={playerId}
+        />
       </LandingContainer>
     </LandingBackground>
   );

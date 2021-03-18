@@ -6,6 +6,7 @@ import Input from "../../components/input/Input";
 import "./landingPage.css";
 import LandingContainer from "../../containers/landingContainers/landingContainer";
 import LandingBackground from "../../containers/landingBackground/landingBackground";
+import { generateCode } from "../../utils/generate";
 
 interface LandingProps {
   nickname: string;
@@ -15,6 +16,7 @@ interface LandingProps {
   setCode: Dispatch<SetStateAction<string>>;
   isOwner: boolean;
   setIsOwner: Dispatch<SetStateAction<boolean>>;
+  setPlayerId: Dispatch<SetStateAction<string>>;
 }
 
 const LandingPage: React.VFC<LandingProps> = ({
@@ -24,23 +26,16 @@ const LandingPage: React.VFC<LandingProps> = ({
   nextAvatar,
   setCode,
   setIsOwner,
+  setPlayerId,
 }) => {
   const history = useHistory();
 
-  const generateCode: () => string = () => {
-    let code = "";
-    const chars =
-      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    for (let i = 9; i > 0; i -= 1) {
-      code += chars[Math.floor(Math.random() * chars.length)];
-    }
-    setCode(code);
-    return code;
-  };
-
   const createRoom = () => {
     if (nickname) {
-      generateCode();
+      const code = generateCode();
+      const playerId = generateCode();
+      setPlayerId(playerId);
+      setCode(code);
       history.push("lobby");
       setIsOwner(true);
     }
@@ -48,6 +43,8 @@ const LandingPage: React.VFC<LandingProps> = ({
 
   const joinRoom = () => {
     if (nickname) history.push("join");
+    const playerId = generateCode();
+    setPlayerId(playerId);
   };
 
   return (

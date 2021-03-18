@@ -4,5 +4,6 @@ export enum SockeType {
   JOINROOM = "joinroom",
   NOTIFICATION = "notification",
   POSITION = "position",
-  PLAYERS="players"
+  PLAYERS = "players",
+  READY = "ready",
 }

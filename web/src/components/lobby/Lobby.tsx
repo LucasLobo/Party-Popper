@@ -6,14 +6,23 @@ import Button from "../button/Button";
 import Person from "./person/Person";
 
 import { Player } from "../../models/player";
+import { socket } from "../../utils/socket";
+import { SocketType } from "../../utils/constants";
 
 interface LobbyProps {
   code: string;
   start: () => void;
   players: Player[];
   isOwner: boolean;
+  playerId: string;
 }
-const Lobby: React.VFC<LobbyProps> = ({ code, start, players, isOwner }) => {
+const Lobby: React.VFC<LobbyProps> = ({
+  code,
+  start,
+  players,
+  isOwner,
+  playerId,
+}) => {
   const [isReady, setReady] = useState(false);
 
   return (
@@ -27,7 +36,7 @@ const Lobby: React.VFC<LobbyProps> = ({ code, start, players, isOwner }) => {
               key={person.playerId}
               name={person.nickName}
               avatar={person.avatar}
-              isReady={isReady}
+              isReady={person.ready}
             />
           );
         })}
@@ -37,11 +46,13 @@ const Lobby: React.VFC<LobbyProps> = ({ code, start, players, isOwner }) => {
         label={isReady ? "Not Ready !" : "Ready !"}
         onClick={() => {
           if (isReady) {
+            console.log(playerId, "work");
+            socket.emit(SocketType.READY, { playerId, code });
             setReady(false);
           } else {
+            socket.emit(SocketType.READY, { playerId, code });
             setReady(true);
           }
-          console.log(isReady);
         }}
       />
       <Button

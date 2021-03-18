@@ -1,9 +1,8 @@
-
 export class Player {
   /**
     The ready state of the player
   */
-  readonly ready: boolean = false;
+  ready: boolean = false;
 
   /**
     The current poisiton of the player
@@ -34,7 +33,7 @@ export class Player {
     nickName: string,
     playerId: string,
     avatar: string,
-    position?: number,
+    position?: number
   ) {
     this.position = position ?? 0;
     this.gameId = gameId;

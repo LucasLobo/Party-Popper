@@ -25,7 +25,7 @@ export class IoEvents {
     const connectUser = new ConnectionService();
     const playGame = new PlayGameService();
 
-    this.socket.on(
+    this.io.on(
       SockeType.DISCONNECTION,
       (socket: Socket, { nickName, gameId }) => {
         connectUser.leaveGame(socket.id);
@@ -36,24 +36,35 @@ export class IoEvents {
     );
 
     // this.io.on(SockeType.CONNECTION, (socket: Socket) => {
-    this.socket.on(SockeType.JOINROOM, ({ nickName, code, avatar }) => {
-      if (code || nickName || avatar) {
-        connectUser.joinGame(code, nickName, socket.id, avatar);
+    this.socket.on(
+      SockeType.JOINROOM,
+      ({ nickName, code, avatar, playerId }) => {
+        if (code || nickName || avatar) {
+          connectUser.joinGame(code, nickName, playerId, avatar);
 
-        this.socket.join(code);
-        console.log(nickName, socket.id, code, avatar);
-        const players = this.gameState.getGamePlayers(code);
+          this.socket.join(code);
+          console.log(nickName, socket.id, code, avatar);
+          const players = this.gameState.getGamePlayers(code);
 
-        this.io.to(code).emit(SockeType.JOINROOM, players);
+          this.io.to(code).emit(SockeType.JOINROOM, players);
 
-        this.socket.broadcast
-          .to(code)
-          .emit(SockeType.NOTIFICATION, `${nickName} has joined the game`);
+          this.socket.broadcast
+            .to(code)
+            .emit(SockeType.NOTIFICATION, `${nickName} has joined the game`);
+        }
       }
-    });
+    );
 
     this.io.on(SockeType.POSITION, ({ position, playerId }) => {
       playGame.updatePosition(position, playerId);
+    });
+
+    this.socket.on(SockeType.READY, (e) => {
+      if (e.playerId) {
+        const p = this.gameState.makePlayerReady(e.playerId);
+        console.log(e.playerId);
+        this.io.to(e.code).emit(SockeType.JOINROOM, p);
+      }
     });
   }
 }

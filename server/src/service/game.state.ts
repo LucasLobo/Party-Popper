@@ -36,6 +36,9 @@ export class GameState {
 
   public joinPlayer(player: Player) {
     this.gameState.players.push(player);
+    let pl = this.gameState.players;
+    let uniquePlayers = [...new Set(pl)];
+    this.gameState.players = uniquePlayers;
     console.log(this.gameState.players);
   }
 
@@ -53,5 +56,20 @@ export class GameState {
         p.position = position;
       }
     });
+  }
+
+  public makePlayerReady(playerId: string): Player[] {
+    const pls = this.gameState.players.map((p) => {
+      if (p.playerId == playerId) {
+        if (p.ready) {
+          console.log(playerId, "working");
+          p.ready = false;
+        } else {
+          p.ready = true;
+        }
+      }
+      return p;
+    });
+    return pls;
   }
 }

@@ -13,12 +13,14 @@ export function usePlayers(): Player[] {
         return new Player(
           p.gameId,
           p.nickName,
+          p.ready,
           p.playerId,
           p.avatar,
           p.position
         );
       });
       setPlayers(pl);
+      console.log(pl);
     });
   }, []);
 
