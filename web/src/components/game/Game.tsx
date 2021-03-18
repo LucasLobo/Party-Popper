@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import "./Game.css";
 
-import useBoard from "../../hooks/useBoard";
-
 import Header from "../header/Header";
 import Board from "./board/Board";
 import Challenge from "./challenge/Challenge";
 import Dice from "./dice/Dice";
+import { IBoard } from "../../hooks/useBoard";
+import { Player } from "../../models/player";
 
-const Game: React.VFC = () => {
+interface GameProps {
+  players: Player[];
+  board: IBoard;
+  moveplayer: (id: string, amount: number) => boolean;
+}
+
+const Game: React.VFC<GameProps> = ({ players, board, moveplayer }) => {
   const description =
     "Never have I ever used a fake ID to get into a party or buy drinks";
   const outcome = "Take 2 sips if you have";
-  const [board, movePlayer] = useBoard();
 
   const [isChallenge, setIsChallenge] = useState<boolean>(false);
   const [isDice, setIsDice] = useState<boolean>(false);
@@ -23,7 +28,7 @@ const Game: React.VFC = () => {
   };
 
   const doSomething: () => void = () => {
-    movePlayer(6732, 1);
+    moveplayer(players[0].playerId, 1);
   };
 
   return (
@@ -33,16 +38,12 @@ const Game: React.VFC = () => {
           isChallenge || isDice ? "game challenge-active" : ""
         }`}
       >
-        <Header
-          color="default"
-          title={board.players[1].name}
-          secondary={`${board.players[1].position}`}
-        />
+        <Header color="default" title="Hello" secondary="bye" />
         <Board fields={board.fields} />
 
         <div className="temp-button-container">
           <button type="button" onClick={doSomething} className="temp-button">
-            Advance Rita
+            Log players
           </button>
 
           <button

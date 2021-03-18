@@ -1,4 +1,4 @@
-export enum SockeType {
+export enum SocketType {
   CONNECTION = "connection",
   DISCONNECTION = "disconnection",
   JOINROOM = "joinroom",

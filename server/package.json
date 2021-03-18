@@ -12,7 +12,7 @@
     "build": "tsc",
     "lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
     "dev": "./scripts/dev.sh",
-    "start": "node dist/server.js",
+    "start": "ts-node src/server.ts",
     "test": "jest",
     "fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix"
   },
@@ -23,6 +23,7 @@
     "express": "4.17.1",
     "nodemon": "2.0.6",
     "socket.io": "^3.1.2",
+    "ts-node": "^9.1.1",
     "websocket": "^1.0.33"
   },
   "devDependencies": {

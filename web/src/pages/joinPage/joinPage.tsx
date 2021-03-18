@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
@@ -12,6 +12,8 @@ interface JoinProps {
   nickname: string;
   gameCode: string;
   setGameCode: Dispatch<SetStateAction<string>>;
+  isOwner: boolean;
+  setIsOwner: Dispatch<SetStateAction<boolean>>;
 }
 
 const JoinPage: React.VFC<JoinProps> = ({
@@ -19,11 +21,18 @@ const JoinPage: React.VFC<JoinProps> = ({
   nickname,
   gameCode,
   setGameCode,
+  isOwner,
+  setIsOwner,
 }) => {
   const history = useHistory();
   if (!nickname) {
     history.replace("/");
   }
+
+  useEffect(() => {
+    setGameCode("");
+    setIsOwner(false);
+  }, []);
 
   const joinRoom = () => {
     if (gameCode) {
@@ -32,6 +41,8 @@ const JoinPage: React.VFC<JoinProps> = ({
   };
 
   const back = () => {
+    // setGameCode("");
+    setIsOwner(false);
     history.goBack();
   };
 

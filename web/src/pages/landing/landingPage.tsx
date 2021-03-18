@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import CircleAvatar from "../../components/circleAvatar/circleAvatar";
 import Button from "../../components/button/Button";
@@ -6,6 +6,7 @@ import Input from "../../components/input/Input";
 import "./landingPage.css";
 import LandingContainer from "../../containers/landingContainers/landingContainer";
 import LandingBackground from "../../containers/landingBackground/landingBackground";
+import { generateCode } from "../../utils/generate";
 
 interface LandingProps {
   nickname: string;
@@ -13,6 +14,9 @@ interface LandingProps {
   setNickame: Dispatch<SetStateAction<string>>;
   nextAvatar: Dispatch<SetStateAction<void>>;
   setCode: Dispatch<SetStateAction<string>>;
+  isOwner: boolean;
+  setIsOwner: Dispatch<SetStateAction<boolean>>;
+  setPlayerId: Dispatch<SetStateAction<string>>;
 }
 
 const LandingPage: React.VFC<LandingProps> = ({
@@ -21,24 +25,17 @@ const LandingPage: React.VFC<LandingProps> = ({
   avatar,
   nextAvatar,
   setCode,
+  setIsOwner,
+  // setPlayerId,
 }) => {
   const history = useHistory();
 
-  const generateCode: () => string = () => {
-    let code = "";
-    const chars =
-      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    for (let i = 9; i > 0; i -= 1) {
-      code += chars[Math.floor(Math.random() * chars.length)];
-    }
-    setCode(code);
-    return code;
-  };
-
   const createRoom = () => {
     if (nickname) {
-      generateCode();
+      const code = generateCode();
+      setCode(code);
       history.push("lobby");
+      setIsOwner(true);
     }
   };
 

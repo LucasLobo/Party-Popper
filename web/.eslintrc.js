@@ -29,6 +29,8 @@ module.exports = {
   rules: {
     "linebreak-style": "off",
     "react/prop-types": "off",
+    "import/prefer-default-export": "off",
+    "react-hooks/exhaustive-deps": "off",
     "prettier/prettier": [
       "error",
       {

@@ -45,6 +45,13 @@ button.button {
   box-shadow: 0 var(--button-3d-height) var(--color-dark-red);
 }
 
+.button.indigo {
+  background-color: var(--color-indigo);
+  border-color: var(--color-dark-indigo);
+  box-shadow: 0 var(--button-3d-height) var(--color-dark-dark-indigo);
+}
+
+
 .button.red.disabled {
   color: var(--color-dark-red);
 }

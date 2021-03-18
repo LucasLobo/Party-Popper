@@ -1,36 +1,38 @@
 export class Player {
   /**
-    The ready state of the player
-  */
-  ready: boolean = false;
+      The ready state of the player
+    */
+  ready: boolean;
 
   /**
-    The current poisiton of the player
-  */
+      The current poisiton of the player
+    */
   position: number;
+
   /**
-    The current room the player is in
-  */
+      The current room the player is in
+    */
   gameId: string;
 
   /**
-    The display Name of the player
-  */
+      The display Name of the player
+    */
   nickName: string;
 
   /**
-    The socketId of the player
-  */
+      The socketId of the player
+    */
   playerId: string;
 
   /**
-    The Avatar of the player
-  */
+      The Avatar of the player
+    */
   avatar: string;
 
   constructor(
     gameId: string,
     nickName: string,
+    ready: boolean,
     playerId: string,
     avatar: string,
     position?: number
@@ -40,5 +42,6 @@ export class Player {
     this.nickName = nickName;
     this.playerId = playerId;
     this.avatar = avatar;
+    this.ready = ready ?? false;
   }
 }

@@ -9,13 +9,10 @@ const app = express();
 const httpServer = http.createServer(app);
 
 const io = new Server(httpServer);
+io.setMaxListeners(200);
 
-io.on("connection", (socket: Socket) => {
+io.on(SockeType.CONNECTION, (socket: Socket) => {
   new IoEvents(io, socket);
-  console.log(socket.id);
-  console.log("connected");
-
-  io.emit("Welcome to the party");
 });
 
-httpServer.listen(3000, () => console.log("Server listening on 3000"));
+httpServer.listen(8000, () => console.log("Server listening on 8000"));

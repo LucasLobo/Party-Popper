@@ -1,5 +1,8 @@
 import { Server, Socket } from "socket.io";
 import { SockeType } from "./contants/constant";
+import { GameState } from "./service/game.state";
+import { ConnectionService } from "./service/connection.service";
+import { PlayGameService } from "./service/playeGameService";
 
 export class IoEvents {
   /**
@@ -11,12 +14,62 @@ export class IoEvents {
   */
   private socket: Socket;
 
+  gameState: GameState;
+
   constructor(io: Server, socket: Socket) {
     this.io = io;
     this.socket = socket;
 
-    this.socket.on(SockeType.DISCONNECTION, () => {
-      io.emit("Disconnecting");
+    this.gameState = GameState.Instance;
+
+    const connectUser = new ConnectionService();
+    const playGame = new PlayGameService();
+
+    this.socket.on(
+      SockeType.DISCONNECTION,
+      (socket: Socket, { nickName, gameId }) => {
+        console.log("Disconnecting");
+        // connectUser.leaveGame(socket.id);
+        // socket.broadcast
+        //   .to(gameId)
+        //   .emit(SockeType.NOTIFICATION, `${nickName} has left the game`);
+      }
+    );
+
+    this.socket.on(SockeType.LEAVING, ({ playerId, code }) => {
+      console.log(playerId, code, "working");
+      const p = connectUser.leaveGame(playerId);
+
+      this.io.to(code).emit(SockeType.JOINROOM, p);
+    });
+
+    this.socket.on(
+      SockeType.JOINROOM,
+      ({ nickName, code, avatar, playerId }) => {
+        if (code || nickName || avatar) {
+          connectUser.joinGame(code, nickName, playerId, avatar);
+
+          this.socket.join(code);
+          const players = this.gameState.getGamePlayers(code);
+
+          this.io.to(code).emit(SockeType.JOINROOM, players);
+
+          this.socket.broadcast
+            .to(code)
+            .emit(SockeType.NOTIFICATION, `${nickName} has joined the game`);
+        }
+      }
+    );
+
+    this.io.on(SockeType.POSITION, ({ position, playerId }) => {
+      playGame.updatePosition(position, playerId);
+    });
+
+    this.socket.on(SockeType.READY, (e) => {
+      if (e.playerId) {
+        const p = this.gameState.makePlayerReady(e.playerId);
+        this.io.to(e.code).emit(SockeType.JOINROOM, p);
+      }
     });
   }
 }
