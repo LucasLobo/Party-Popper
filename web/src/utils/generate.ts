@@ -1,8 +1,6 @@
+import { v4 as uuidv4 } from "uuid";
+
 export const generateCode: () => string = () => {
-  let code = "";
-  const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  for (let i = 9; i > 0; i -= 1) {
-    code += chars[Math.floor(Math.random() * chars.length)];
-  }
+  const code = uuidv4();
   return code;
 };
