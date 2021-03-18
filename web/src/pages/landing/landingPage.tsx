@@ -13,6 +13,8 @@ interface LandingProps {
   setNickame: Dispatch<SetStateAction<string>>;
   nextAvatar: Dispatch<SetStateAction<void>>;
   setCode: Dispatch<SetStateAction<string>>;
+  isOwner: boolean;
+  setIsOwner: Dispatch<SetStateAction<boolean>>;
 }
 
 const LandingPage: React.VFC<LandingProps> = ({
@@ -21,6 +23,7 @@ const LandingPage: React.VFC<LandingProps> = ({
   avatar,
   nextAvatar,
   setCode,
+  setIsOwner,
 }) => {
   const history = useHistory();
 
@@ -39,6 +42,7 @@ const LandingPage: React.VFC<LandingProps> = ({
     if (nickname) {
       generateCode();
       history.push("lobby");
+      setIsOwner(true);
     }
   };
 

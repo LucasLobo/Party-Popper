@@ -14,6 +14,7 @@ interface LobbyPageProps {
   nickName: string;
   avatar: string;
   players: Player[];
+  isOwner: boolean;
 }
 
 const LobbyPage: React.VFC<LobbyPageProps> = ({
@@ -21,6 +22,7 @@ const LobbyPage: React.VFC<LobbyPageProps> = ({
   nickName,
   avatar,
   players,
+  isOwner,
 }) => {
   const history = useHistory();
 
@@ -41,7 +43,7 @@ const LobbyPage: React.VFC<LobbyPageProps> = ({
     <LandingBackground>
       <h1 className="header-text">Party Popper</h1>
       <LandingContainer>
-        <Lobby code={code} start={start} players={players} />
+        <Lobby code={code} start={start} players={players} isOwner={isOwner} />
       </LandingContainer>
     </LandingBackground>
   );

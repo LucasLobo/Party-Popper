@@ -8,7 +8,7 @@ interface ButtonProps {
   color?: string;
   onClick: () => void;
 }
-const allowedColors = ["default", "blue", "red", "green"];
+const allowedColors = ["default", "blue", "red", "green", "indigo", "pink"];
 
 const Button: React.VFC<ButtonProps> = ({
   className,

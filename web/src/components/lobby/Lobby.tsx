@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Lobby.css";
 
 import Input from "../input/Input";
@@ -11,8 +11,11 @@ interface LobbyProps {
   code: string;
   start: () => void;
   players: Player[];
+  isOwner: boolean;
 }
-const Lobby: React.VFC<LobbyProps> = ({ code, start, players }) => {
+const Lobby: React.VFC<LobbyProps> = ({ code, start, players, isOwner }) => {
+  const [isReady, setReady] = useState(false);
+
   return (
     <div className="lobby-container">
       <Input placeholder="game code" color="blue" value={code} disabled />
@@ -24,15 +27,35 @@ const Lobby: React.VFC<LobbyProps> = ({ code, start, players }) => {
               key={person.playerId}
               name={person.nickName}
               avatar={person.avatar}
+              isReady={isReady}
             />
           );
         })}
       </div>
       <Button
-        label="copy invite code"
-        onClick={() => navigator.clipboard.writeText(code)}
+        color={isReady ? "red" : "indigo"}
+        label={isReady ? "Not Ready !" : "Ready !"}
+        onClick={() => {
+          if (isReady) {
+            setReady(false);
+          } else {
+            setReady(true);
+          }
+          console.log(isReady);
+        }}
       />
-      <Button color="green" label="start game" onClick={start} />
+      <Button
+        label="copy invite code"
+        onClick={() => {
+          console.log(players);
+          navigator.clipboard.writeText(code);
+        }}
+      />
+      {isOwner ? (
+        <Button color="green" label="start game" onClick={start} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

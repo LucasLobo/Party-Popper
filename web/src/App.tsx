@@ -13,6 +13,7 @@ const App: React.VFC = () => {
   const [avatar, nextAvatar] = useAvatar();
   const [code, setCode] = useState("");
   const [board, players, movePlayer] = useBoard();
+  const [isOwner, setIsOwner] = useState(false);
 
   return (
     <BrowserRouter>
@@ -24,6 +25,8 @@ const App: React.VFC = () => {
             avatar={avatar}
             nextAvatar={nextAvatar}
             setCode={setCode}
+            isOwner={isOwner}
+            setIsOwner={setIsOwner}
           />
         </Route>
         <Route path="/join">
@@ -32,11 +35,14 @@ const App: React.VFC = () => {
             avatar={avatar}
             gameCode={code}
             setGameCode={setCode}
+            isOwner={isOwner}
+            setIsOwner={setIsOwner}
           />
         </Route>
         <Route path="/lobby">
           <LobbyPage
             code={code}
+            isOwner={isOwner}
             nickName={nickname}
             avatar={avatar}
             players={players}

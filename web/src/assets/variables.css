@@ -75,6 +75,10 @@
   --color-medium-purple: hsl(295, 78%, 55%);
   --color-light-purple: hsl(295, 78%, 77%);
 
+  --color-indigo:hsl(275, 100%, 25%);
+  --color-dark-indigo:hsl(275, 100%, 25%);
+  --color-dark-dark-indigo:hsl(274, 92%, 10%);
+
   --color-dark-orange: hsl(29, 97%, 33%);
   --color-medium-orange: hsl(29, 97%, 55%);
   --color-light-orange: hsl(29, 97%, 77%);
