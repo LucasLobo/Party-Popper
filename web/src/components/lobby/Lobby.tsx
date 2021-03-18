@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Lobby.css";
 
 import Input from "../input/Input";
@@ -24,6 +24,17 @@ const Lobby: React.VFC<LobbyProps> = ({
   playerId,
 }) => {
   const [isReady, setReady] = useState(false);
+  const [isAllReady, setAllReady] = useState(false);
+  const isAllReadycheck = () => {
+    for (let p = 0; p < players.length; p += 1) {
+      if (!players[p].ready) return false;
+    }
+    return true;
+  };
+
+  useEffect(() => {
+    setAllReady(isAllReadycheck());
+  }, [players, isReady]);
 
   return (
     <div className="lobby-container">
@@ -62,10 +73,13 @@ const Lobby: React.VFC<LobbyProps> = ({
           navigator.clipboard.writeText(code);
         }}
       />
-      {isOwner ? (
-        <Button color="green" label="start game" onClick={start} />
-      ) : (
-        <></>
+      {isOwner && (
+        <Button
+          color="green"
+          label="start game"
+          onClick={start}
+          disabled={!isAllReady}
+        />
       )}
     </div>
   );
