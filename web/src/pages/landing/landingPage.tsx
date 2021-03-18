@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import CircleAvatar from "../../components/circleAvatar/circleAvatar";
 import Button from "../../components/button/Button";
@@ -26,15 +26,13 @@ const LandingPage: React.VFC<LandingProps> = ({
   nextAvatar,
   setCode,
   setIsOwner,
-  setPlayerId,
+  // setPlayerId,
 }) => {
   const history = useHistory();
 
   const createRoom = () => {
     if (nickname) {
       const code = generateCode();
-      const playerId = generateCode();
-      setPlayerId(playerId);
       setCode(code);
       history.push("lobby");
       setIsOwner(true);
@@ -43,8 +41,6 @@ const LandingPage: React.VFC<LandingProps> = ({
 
   const joinRoom = () => {
     if (nickname) history.push("join");
-    const playerId = generateCode();
-    setPlayerId(playerId);
   };
 
   return (

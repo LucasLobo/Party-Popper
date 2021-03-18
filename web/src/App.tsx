@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Game from "./components/game/Game";
 import LandingPage from "./pages/landing/landingPage";
@@ -7,6 +7,9 @@ import "./assets/variables.css";
 import useAvatar from "./hooks/useAvatar";
 import useBoard from "./hooks/useBoard";
 import LobbyPage from "./pages/lobbyPage/lobbyPage";
+import { generateCode } from "./utils/generate";
+import { socket } from "./utils/socket";
+import { SocketType } from "./utils/constants";
 
 const App: React.VFC = () => {
   const [nickname, setNickame] = useState("");
@@ -15,6 +18,31 @@ const App: React.VFC = () => {
   const [board, players, movePlayer] = useBoard();
   const [isOwner, setIsOwner] = useState(false);
   const [playerId, setPlayerId] = useState("");
+
+  const alertUser = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    e.returnValue = "";
+    console.log("unload event");
+  };
+  const handleDisconnect = () => {
+    socket.emit(SocketType.LEAVING, { playerId, code });
+    socket.disconnect();
+  };
+
+  useEffect(() => {
+    const pid = generateCode();
+    setPlayerId(pid);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", alertUser);
+    window.addEventListener("unload", handleDisconnect);
+    return () => {
+      window.removeEventListener("beforeunload", alertUser);
+      window.removeEventListener("unload", handleDisconnect);
+      handleDisconnect();
+    };
+  }, []);
 
   return (
     <BrowserRouter>

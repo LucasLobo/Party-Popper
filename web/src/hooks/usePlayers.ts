@@ -8,7 +8,6 @@ export function usePlayers(): Player[] {
 
   useEffect(() => {
     socket.on(SocketType.JOINROOM, (soc: any) => {
-      console.log("SocketType.JOINROOM", soc);
       const pl = soc.map((p: any) => {
         return new Player(
           p.gameId,
@@ -20,7 +19,6 @@ export function usePlayers(): Player[] {
         );
       });
       setPlayers(pl);
-      console.log(pl);
     });
   }, []);
 

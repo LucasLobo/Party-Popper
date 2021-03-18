@@ -30,24 +30,29 @@ export class GameState {
     const players = this.gameState.players.filter(
       (player) => player.gameId == gameId
     );
-    console.log(players.length);
     return players;
   }
 
   public joinPlayer(player: Player) {
-    this.gameState.players.push(player);
     let pl = this.gameState.players;
-    let uniquePlayers = [...new Set(pl)];
-    this.gameState.players = uniquePlayers;
+    let present = false;
+    pl.forEach((p) => {
+      if (p.playerId == player.playerId) {
+        present = true;
+      }
+    });
+
+    if (!present) this.gameState.players.push(player);
+
     console.log(this.gameState.players);
   }
 
-  public disconnectplayer(playerId: string): void {
+  public disconnectplayer(playerId: string): Player[] {
     const players = this.gameState.players.filter(
       (p) => p.playerId != playerId
     );
 
-    this.gameState.players = players;
+    return (this.gameState.players = players);
   }
 
   public updatePLayerPosition(position: number, playerId: string): void {

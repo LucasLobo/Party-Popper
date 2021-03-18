@@ -57,7 +57,6 @@ const Lobby: React.VFC<LobbyProps> = ({
         label={isReady ? "Not Ready !" : "Ready !"}
         onClick={() => {
           if (isReady) {
-            console.log(playerId, "work");
             socket.emit(SocketType.READY, { playerId, code });
             setReady(false);
           } else {
@@ -69,7 +68,6 @@ const Lobby: React.VFC<LobbyProps> = ({
       <Button
         label="copy invite code"
         onClick={() => {
-          console.log(players);
           navigator.clipboard.writeText(code);
         }}
       />
