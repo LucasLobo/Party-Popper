@@ -24,7 +24,7 @@ const People: React.VFC<PlayersProps> = ({ players }) => {
         {players.map((player) => {
           return (
             <img
-              key={player.nickName}
+              key={player.playerId}
               alt={player.avatar}
               src={getIconPath(player.avatar)}
             />

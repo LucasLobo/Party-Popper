@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import { SockeType } from "./contants/constant";
 import { GameState } from "./service/game.state";
 import { ConnectionService } from "./service/connection.service";
-import { PlayGameService } from "./service/playeGameService";
+import { PlayGameService } from "./service/playerGameService";
 
 export class IoEvents {
   /**
@@ -47,6 +47,7 @@ export class IoEvents {
       SockeType.JOINROOM,
       ({ nickName, code, avatar, playerId }) => {
         if (code || nickName || avatar) {
+          console.log("JOINROOM", nickName, code, avatar, playerId);
           connectUser.joinGame(code, nickName, playerId, avatar);
 
           this.socket.join(code);
@@ -61,27 +62,48 @@ export class IoEvents {
       }
     );
 
-    this.io.on(SockeType.POSITION, ({ position, playerId }) => {
-      playGame.updatePosition(position, playerId);
-    });
+    // this.io.on(SockeType.POSITION, ({ position, playerId }) => {
+    //   playGame.updatePosition(position, playerId);
+    // });
 
     this.socket.on(SockeType.READY, (e) => {
       if (e.playerId) {
+        console.log("READY", e.playerId);
         const players = this.gameState.getGamePlayers(e.code);
         const p = this.gameState.makePlayerReady(e.playerId, players);
         this.io.to(e.code).emit(SockeType.JOINROOM, p);
       }
     });
 
-    this.socket.on(
-      SockeType.GAMEINITIALISED,
-      ({ code }) => {
-        if (code) {
-          this.socket.broadcast
-            .to(code)
-            .emit(SockeType.GAMESTARTED, `${code} has started`);
-        }
+    this.socket.on(SockeType.GAMEINITIALISED, ({ code }) => {
+      if (code) {
+        console.log("GAMEINITIALISED", code);
+
+        this.socket.broadcast
+          .to(code)
+          .emit(SockeType.GAMESTARTED, `${code} has started`);
+        const players = this.gameState.getGamePlayers(code);
+        const pls = playGame.choosePerson(players);
+        this.io.to(code).emit("chooseplayer", pls);
+        console.log("chooseplayer", pls);
       }
-    );
+    });
+
+    this.socket.on("updateposition", ({ playerId, amount, code }) => {
+      console.log("UPDATEPOSITION", playerId, code, amount);
+      const players = this.gameState.getGamePlayers(code);
+
+      playGame.movePlayer(playerId, amount, players);
+
+      this.io.to(code).emit(SockeType.JOINROOM, players);
+      this.io.to(code).emit("positionupdated", playerId);
+    });
+
+    this.socket.on("chooseplayer", ({ code }) => {
+      console.log("CHOOSEPLAYER", code);
+      const players = this.gameState.getGamePlayers(code);
+      const pls = playGame.choosePerson(players);
+      this.io.to(code).emit("chooseplayer", pls);
+    });
   }
 }

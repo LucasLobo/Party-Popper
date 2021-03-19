@@ -80,7 +80,13 @@ const App: React.VFC = () => {
           />
         </Route>
         <Route path="/game">
-          <Game board={board} players={players} moveplayer={movePlayer} />
+          <Game
+            board={board}
+            players={players}
+            moveplayer={movePlayer}
+            currentPlayerId={playerId}
+            code={code}
+          />
         </Route>
       </Switch>
     </BrowserRouter>

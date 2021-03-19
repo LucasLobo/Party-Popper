@@ -19,7 +19,6 @@ export interface IField {
 }
 
 export interface IBoard {
-  code: number;
   fields: IField[];
 }
 

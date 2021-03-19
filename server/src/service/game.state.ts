@@ -4,6 +4,7 @@ import { Player } from "src/models/player";
 interface IGameState {
   players: Player[];
   game?: Game | null;
+  board: number;
 }
 
 export class GameState {
@@ -15,6 +16,7 @@ export class GameState {
     this.gameState = {
       players: [],
       game: null,
+      board: 12,
     };
   }
 
@@ -22,9 +24,14 @@ export class GameState {
     return this._instance || (this._instance = new this());
   }
 
+  /**
+   * board
+   */
+  public board(): number {
+    return this.gameState.board;
+  }
 
   public getGamePlayers(gameId: string): Player[] {
-    console.log(this.gameState.players, 'unfilter');
     const filteredPlayers = [];
 
     const { players } = this.gameState;
@@ -33,14 +40,13 @@ export class GameState {
         filteredPlayers.push(players[i]);
       }
     }
-    console.log(filteredPlayers, 'filter');
     return filteredPlayers;
   }
 
   public joinPlayer(player: Player) {
     let pl = this.gameState.players;
     let present = false;
-    pl.forEach(p => {
+    pl.forEach((p) => {
       if (p.playerId === player.playerId) {
         present = true;
       }
@@ -65,7 +71,7 @@ export class GameState {
     });
   }
 
-  public makePlayerReady(playerId: string, players: Player []): Player[] {
+  public makePlayerReady(playerId: string, players: Player[]): Player[] {
     const pls = players.map((p) => {
       if (p.playerId === playerId) {
         if (p.ready) {

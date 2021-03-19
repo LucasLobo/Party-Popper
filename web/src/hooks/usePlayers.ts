@@ -18,6 +18,7 @@ export function usePlayers(): Player[] {
           p.position
         );
       });
+      console.log(pl);
       setPlayers(pl);
     });
   }, []);
