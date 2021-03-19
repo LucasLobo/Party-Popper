@@ -7,4 +7,6 @@ export enum SockeType {
   PLAYERS = "players",
   READY = "ready",
   LEAVING = "leaving",
+  GAMEINITIALISED = "gameInitialised",
+  GAMESTARTED = "gameStarted",
 }
