@@ -1,52 +1,52 @@
 {
   "action": [
     {
-      "description": "action1",
-      "outcome": "action1"
+      "description": "Do a handstand for at least 3 seconds",
+      "outcome": "give out 4 sips if you succeed, drink 2 otherwise"
     },
     {
-      "description": "action2",
-      "outcome": "action2"
+      "description": "Speak with a Russian accent until your next round",
+      "outcome": "You can distribute 2 sips"
     }
   ],
   "never have i ever": [
     {
-      "description": "never have i ever1",
-      "outcome": "else"
+      "description": "Never have I ever used a fake ID",
+      "outcome": "Everyone that has will drink 2 times"
     },
     {
-      "description": "never have i ever2",
-      "outcome": "def"
+      "description": "Never have I ever puked in a cab",
+      "outcome": "Everyone that has will drink 2 times"
     }
   ],
   "joker": [
     {
-      "description": "joker1",
-      "outcome": "else"
+      "description": "it's the joker round!",
+      "outcome": "drink your whole cup"
     },
     {
-      "description": "joker2",
-      "outcome": "def"
+      "description": "it's the joker round!",
+      "outcome": "drink half of your cup"
     }
   ],
   "trivia": [
     {
-      "description": "trivia1",
-      "outcome": "else"
+      "description": "What's the capital of Australia?",
+      "outcome": "Drink 2 sips if you get it wrong"
     },
     {
-      "description": "trivia2",
-      "outcome": "def"
+      "description": "How many legs does a spider have?",
+      "outcome": "Drink 3 sips if you get it wrong"
     }
   ],
   "truth or dare": [
     {
-      "description": "truth or dare1",
-      "outcome": "else"
+      "description": "The player to your left should ask you a truth or dare",
+      "outcome": "The dare is 4 sips"
     },
     {
-      "description": "truth or dare2",
-      "outcome": "def"
+      "description": "The player in front of you should ask you a truth or dare",
+      "outcome": "The dare is 3 sips"
     }
   ]
 }
