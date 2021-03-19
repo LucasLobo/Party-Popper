@@ -22,29 +22,31 @@ export class GameState {
     return this._instance || (this._instance = new this());
   }
 
-  // public getGameState(): IGameState {
-  //   return this.gameState;
-  // }
 
   public getGamePlayers(gameId: string): Player[] {
-    const players = this.gameState.players.filter(
-      (player) => player.gameId == gameId
-    );
-    return players;
+    console.log(this.gameState.players, 'unfilter');
+    const filteredPlayers = [];
+
+    const { players } = this.gameState;
+    for (let i = 0; i < players.length; i += 1) {
+      if (players[i].gameId === gameId) {
+        filteredPlayers.push(players[i]);
+      }
+    }
+    console.log(filteredPlayers, 'filter');
+    return filteredPlayers;
   }
 
   public joinPlayer(player: Player) {
     let pl = this.gameState.players;
     let present = false;
-    pl.forEach((p) => {
-      if (p.playerId == player.playerId) {
+    pl.forEach(p => {
+      if (p.playerId === player.playerId) {
         present = true;
       }
     });
 
     if (!present) this.gameState.players.push(player);
-
-    console.log(this.gameState.players);
   }
 
   public disconnectplayer(playerId: string): Player[] {
@@ -63,11 +65,11 @@ export class GameState {
     });
   }
 
-  public makePlayerReady(playerId: string): Player[] {
-    const pls = this.gameState.players.map((p) => {
-      if (p.playerId == playerId) {
+  public makePlayerReady(playerId: string, players: Player []): Player[] {
+    const pls = players.map((p) => {
+      if (p.playerId === playerId) {
         if (p.ready) {
-          console.log(playerId, "working");
+          // console.log(playerId, "working");
           p.ready = false;
         } else {
           p.ready = true;

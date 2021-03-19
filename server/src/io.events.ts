@@ -37,7 +37,7 @@ export class IoEvents {
     );
 
     this.socket.on(SockeType.LEAVING, ({ playerId, code }) => {
-      console.log(playerId, code, "working");
+      // console.log(playerId, code, "working");
       const p = connectUser.leaveGame(playerId);
 
       this.io.to(code).emit(SockeType.JOINROOM, p);
@@ -67,7 +67,8 @@ export class IoEvents {
 
     this.socket.on(SockeType.READY, (e) => {
       if (e.playerId) {
-        const p = this.gameState.makePlayerReady(e.playerId);
+        const players = this.gameState.getGamePlayers(e.code);
+        const p = this.gameState.makePlayerReady(e.playerId, players);
         this.io.to(e.code).emit(SockeType.JOINROOM, p);
       }
     });

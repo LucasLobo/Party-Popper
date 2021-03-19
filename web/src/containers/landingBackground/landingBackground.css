@@ -1,7 +1,6 @@
 .landing-background {
   min-height: 100vh;
   background: linear-gradient(170deg, var(--landing-gradient-color-1), var(--landing-gradient-color-2));
-
   display: flex;
   flex-direction: column;
 } 
