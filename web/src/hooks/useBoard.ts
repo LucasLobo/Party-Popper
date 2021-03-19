@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 import gameData from "../assets/game.json";
 import { Player } from "../models/player";
 import { usePlayers } from "./usePlayers";
@@ -25,16 +24,16 @@ export interface IBoard {
 function useBoard(): [
   IBoard,
   Player[],
-  (id: string, amount: number) => boolean
+  (id: string, amount: number) => boolean,
+  (fields: IField[]) => void
 ] {
-  const [board, setBoard] = useState<IBoard>({
-    ...gameData,
-  });
+  const [board, setBoard] = useState<IBoard>({ fields: [] });
 
   const players: Player[] = usePlayers();
 
   const computePlayerFields = () => {
     const { fields } = board;
+    if (fields.length === 0) return;
 
     for (let i = 0; i < board.fields.length; i += 1) {
       board.fields[i].players = [];
@@ -47,6 +46,13 @@ function useBoard(): [
       fields[player.position].players?.push(player);
     });
     setBoard({ ...board, fields: board.fields });
+  };
+
+  const makeBoard = (fields: IField[]) => {
+    setBoard({
+      fields,
+    });
+    computePlayerFields();
   };
 
   const movePlayer = (id: string, amount: number) => {
@@ -65,7 +71,7 @@ function useBoard(): [
     computePlayerFields();
   }, [players]);
 
-  return [board, players, movePlayer];
+  return [board, players, movePlayer, makeBoard];
 }
 
 export default useBoard;

@@ -82,6 +82,7 @@ export class IoEvents {
         this.socket.broadcast
           .to(code)
           .emit(SockeType.GAMESTARTED, `${code} has started`);
+
         const players = this.gameState.getGamePlayers(code);
         const pls = playGame.choosePerson(players);
         this.io.to(code).emit("chooseplayer", pls);
@@ -93,7 +94,7 @@ export class IoEvents {
       console.log("UPDATEPOSITION", playerId, code, amount);
       const players = this.gameState.getGamePlayers(code);
 
-      playGame.movePlayer(playerId, amount, players);
+      playGame.movePlayer(playerId, amount, players, code);
 
       this.io.to(code).emit(SockeType.JOINROOM, players);
       this.io.to(code).emit("positionupdated", playerId);
@@ -104,6 +105,17 @@ export class IoEvents {
       const players = this.gameState.getGamePlayers(code);
       const pls = playGame.choosePerson(players);
       this.io.to(code).emit("chooseplayer", pls);
+    });
+
+    this.socket.on("creategame", ({ code }) => {
+      console.log("creategame", code);
+      const board = playGame.generateboard();
+      this.gameState.updateBoard(code, board);
+    });
+
+    this.socket.on("requestboard", ({ code }) => {
+      const board = this.gameState.board(code);
+      this.io.to(code).emit("requestboard", { board });
     });
   }
 }

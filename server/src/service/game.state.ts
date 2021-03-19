@@ -1,10 +1,9 @@
-import { Game } from "src/models/game";
+import { Field } from "src/models/field";
 import { Player } from "src/models/player";
 
 interface IGameState {
   players: Player[];
-  game?: Game | null;
-  board: number;
+  boards: Map<string, Field[]>;
 }
 
 export class GameState {
@@ -15,8 +14,7 @@ export class GameState {
   constructor() {
     this.gameState = {
       players: [],
-      game: null,
-      board: 12,
+      boards: new Map(),
     };
   }
 
@@ -27,8 +25,12 @@ export class GameState {
   /**
    * board
    */
-  public board(): number {
-    return this.gameState.board;
+
+  public board(code: string): Field[] {
+    if (!this.gameState.boards.get(`${code}`)) {
+      throw Error(`board() : ${code} undefined`);
+    }
+    return this.gameState.boards.get(`${code}`)!;
   }
 
   public getGamePlayers(gameId: string): Player[] {
@@ -41,6 +43,11 @@ export class GameState {
       }
     }
     return filteredPlayers;
+  }
+
+  public updateBoard(code: string, fields: Field[]) {
+    this.gameState.boards.set(code, fields);
+    console.log("board fields", this.gameState.boards);
   }
 
   public joinPlayer(player: Player) {

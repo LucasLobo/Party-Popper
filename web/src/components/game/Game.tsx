@@ -37,7 +37,6 @@ const Game: React.VFC<GameProps> = ({
       amount,
       code,
     });
-    console.log(code, "board.code");
     setIsDice(false);
   };
 
@@ -51,7 +50,7 @@ const Game: React.VFC<GameProps> = ({
 
   useEffect(() => {
     socket.on("chooseplayer", (player: any) => {
-      console.table(player.playerId);
+      console.table(player);
       if (player.playerId === currentPlayerId) {
         setIsDice(true);
       } else {
@@ -60,7 +59,6 @@ const Game: React.VFC<GameProps> = ({
     });
 
     socket.on("positionupdated", (playerId: any) => {
-      console.log("positionupdated", playerId);
       if (currentPlayerId === playerId) {
         setIsChallenge(true);
       }

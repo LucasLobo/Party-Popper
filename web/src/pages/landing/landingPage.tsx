@@ -7,6 +7,7 @@ import "./landingPage.css";
 import LandingContainer from "../../containers/landingContainers/landingContainer";
 import LandingBackground from "../../containers/landingBackground/landingBackground";
 import { generateCode } from "../../utils/generate";
+import { socket } from "../../utils/socket";
 
 interface LandingProps {
   nickname: string;
@@ -36,6 +37,7 @@ const LandingPage: React.VFC<LandingProps> = ({
       setCode(code);
       history.push("lobby");
       setIsOwner(true);
+      socket.emit("creategame", { code });
     }
   };
 
