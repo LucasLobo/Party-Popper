@@ -15,14 +15,13 @@ const App: React.VFC = () => {
   const [nickname, setNickame] = useState("");
   const [avatar, nextAvatar] = useAvatar();
   const [code, setCode] = useState("");
-  const [board, players, movePlayer] = useBoard();
+  const [board, players, makeBoard] = useBoard();
   const [isOwner, setIsOwner] = useState(false);
   const [playerId, setPlayerId] = useState("");
 
   const alertUser = (e: BeforeUnloadEvent) => {
     e.preventDefault();
     e.returnValue = "";
-    console.log("unload event");
   };
   const handleDisconnect = () => {
     socket.emit(SocketType.LEAVING, { playerId, code });
@@ -65,7 +64,6 @@ const App: React.VFC = () => {
             avatar={avatar}
             gameCode={code}
             setGameCode={setCode}
-            isOwner={isOwner}
             setIsOwner={setIsOwner}
           />
         </Route>
@@ -77,10 +75,16 @@ const App: React.VFC = () => {
             avatar={avatar}
             players={players}
             playerId={playerId}
+            makeBoard={makeBoard}
           />
         </Route>
         <Route path="/game">
-          <Game board={board} players={players} moveplayer={movePlayer} />
+          <Game
+            board={board}
+            currentPlayerId={playerId}
+            players={players}
+            code={code}
+          />
         </Route>
       </Switch>
     </BrowserRouter>

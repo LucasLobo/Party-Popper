@@ -8,6 +8,7 @@ import Lobby from "../../components/lobby/Lobby";
 import { SocketType } from "../../utils/constants";
 import { socket } from "../../utils/socket";
 import { Player } from "../../models/player";
+import { IField } from "../../hooks/useBoard";
 
 interface LobbyPageProps {
   code: string;
@@ -16,6 +17,7 @@ interface LobbyPageProps {
   players: Player[];
   isOwner: boolean;
   playerId: string;
+  makeBoard: (fields: IField[]) => void;
 }
 
 const LobbyPage: React.VFC<LobbyPageProps> = ({
@@ -25,6 +27,7 @@ const LobbyPage: React.VFC<LobbyPageProps> = ({
   players,
   isOwner,
   playerId,
+  makeBoard,
 }) => {
   const history = useHistory();
 
@@ -33,19 +36,22 @@ const LobbyPage: React.VFC<LobbyPageProps> = ({
   }
 
   const start = () => {
-    socket.connect();
     socket.emit(SocketType.GAMEINITIALISED, { code });
     history.push("/game");
   };
-  socket.connect();
-  socket.on(SocketType.GAMESTARTED, (arg: string) => {
+
+  socket.on(SocketType.GAMESTARTED, () => {
     history.push("/game");
-    console.log(arg);
   });
 
   useEffect(() => {
     socket.connect();
     socket.emit(SocketType.JOINROOM, { playerId, nickName, code, avatar });
+    socket.emit("requestboard", { code });
+
+    socket.on("requestboard", ({ board }: any) => {
+      makeBoard(board);
+    });
   }, []);
 
   return (

@@ -10,3 +10,19 @@ export enum SockeType {
   GAMEINITIALISED = "gameInitialised",
   GAMESTARTED = "gameStarted",
 }
+
+export const colors = [
+  "red",
+  "blue",
+  "green",
+  "purple",
+  "orange",
+  "yellow",
+];
+export const categories = [
+  "action",
+  "never have i ever",
+  "joker",
+  "trivia",
+  "truth or dare",
+];

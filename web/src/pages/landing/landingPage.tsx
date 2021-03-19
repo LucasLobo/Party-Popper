@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useHistory } from "react-router-dom";
 import CircleAvatar from "../../components/circleAvatar/circleAvatar";
 import Button from "../../components/button/Button";
@@ -7,6 +7,7 @@ import "./landingPage.css";
 import LandingContainer from "../../containers/landingContainers/landingContainer";
 import LandingBackground from "../../containers/landingBackground/landingBackground";
 import { generateCode } from "../../utils/generate";
+import { socket } from "../../utils/socket";
 
 interface LandingProps {
   nickname: string;
@@ -36,6 +37,7 @@ const LandingPage: React.VFC<LandingProps> = ({
       setCode(code);
       history.push("lobby");
       setIsOwner(true);
+      socket.emit("creategame", { code });
     }
   };
 

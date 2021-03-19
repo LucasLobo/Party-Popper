@@ -1,0 +1,52 @@
+{
+  "action": [
+    {
+      "description": "action1",
+      "outcome": "action1"
+    },
+    {
+      "description": "action2",
+      "outcome": "action2"
+    }
+  ],
+  "never have i ever": [
+    {
+      "description": "never have i ever1",
+      "outcome": "else"
+    },
+    {
+      "description": "never have i ever2",
+      "outcome": "def"
+    }
+  ],
+  "joker": [
+    {
+      "description": "joker1",
+      "outcome": "else"
+    },
+    {
+      "description": "joker2",
+      "outcome": "def"
+    }
+  ],
+  "trivia": [
+    {
+      "description": "trivia1",
+      "outcome": "else"
+    },
+    {
+      "description": "trivia2",
+      "outcome": "def"
+    }
+  ],
+  "truth or dare": [
+    {
+      "description": "truth or dare1",
+      "outcome": "else"
+    },
+    {
+      "description": "truth or dare2",
+      "outcome": "def"
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import "./Dice.css";
 import Button from "../../button/Button";
 
 interface DiceProps {
-  resultCallback: (diceFace: string) => void;
+  resultCallback: (diceFace: number) => void;
 }
 
 function getRandomInt(min: number, max: number) {
@@ -43,7 +43,8 @@ const Dice: React.VFC<DiceProps> = ({ resultCallback }) => {
       setTimeout(rotateDice, 700);
     } else {
       setTimeout(() => {
-        resultCallback(newDiceFace);
+        const i = faces.indexOf(newDiceFace);
+        resultCallback(i + 1);
       }, 700);
     }
   };

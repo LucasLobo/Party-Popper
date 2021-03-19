@@ -1,9 +1,9 @@
-import { Game } from "src/models/game";
+import { Field } from "src/models/field";
 import { Player } from "src/models/player";
 
 interface IGameState {
   players: Player[];
-  game?: Game | null;
+  boards: Map<string, Field[]>;
 }
 
 export class GameState {
@@ -14,7 +14,7 @@ export class GameState {
   constructor() {
     this.gameState = {
       players: [],
-      game: null,
+      boards: new Map(),
     };
   }
 
@@ -22,9 +22,18 @@ export class GameState {
     return this._instance || (this._instance = new this());
   }
 
+  /**
+   * board
+   */
+
+  public board(code: string): Field[] {
+    if (!this.gameState.boards.get(`${code}`)) {
+      throw Error(`board() : ${code} undefined`);
+    }
+    return this.gameState.boards.get(`${code}`)!;
+  }
 
   public getGamePlayers(gameId: string): Player[] {
-    console.log(this.gameState.players, 'unfilter');
     const filteredPlayers = [];
 
     const { players } = this.gameState;
@@ -33,14 +42,18 @@ export class GameState {
         filteredPlayers.push(players[i]);
       }
     }
-    console.log(filteredPlayers, 'filter');
     return filteredPlayers;
+  }
+
+  public updateBoard(code: string, fields: Field[]) {
+    this.gameState.boards.set(code, fields);
+    console.log("board fields", this.gameState.boards);
   }
 
   public joinPlayer(player: Player) {
     let pl = this.gameState.players;
     let present = false;
-    pl.forEach(p => {
+    pl.forEach((p) => {
       if (p.playerId === player.playerId) {
         present = true;
       }
@@ -65,7 +78,7 @@ export class GameState {
     });
   }
 
-  public makePlayerReady(playerId: string, players: Player []): Player[] {
+  public makePlayerReady(playerId: string, players: Player[]): Player[] {
     const pls = players.map((p) => {
       if (p.playerId === playerId) {
         if (p.ready) {
