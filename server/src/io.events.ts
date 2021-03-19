@@ -72,5 +72,16 @@ export class IoEvents {
         this.io.to(e.code).emit(SockeType.JOINROOM, p);
       }
     });
+
+    this.socket.on(
+      SockeType.GAMEINITIALISED,
+      ({ code }) => {
+        if (code) {
+          this.socket.broadcast
+            .to(code)
+            .emit(SockeType.GAMESTARTED, `${code} has started`);
+        }
+      }
+    );
   }
 }

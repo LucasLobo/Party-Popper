@@ -33,8 +33,15 @@ const LobbyPage: React.VFC<LobbyPageProps> = ({
   }
 
   const start = () => {
+    socket.connect();
+    socket.emit(SocketType.GAMEINITIALISED, { code });
     history.push("/game");
   };
+  socket.connect();
+  socket.on(SocketType.GAMESTARTED, (arg: string) => {
+    history.push("/game");
+    console.log(arg);
+  });
 
   useEffect(() => {
     socket.connect();
