@@ -3,15 +3,15 @@
 
 
 ## Inspiration
----
-* The main inspiration behind Party popper is to provide an interactive and fun experience in boring parties
+
+The main inspiration behind Party popper is to provide an interactive and fun experience in boring parties
 
 ## What it does
----
+
 Party popper is a realtime multiplayer board game consists of many fun challenges. It makes boring parties/events fun and enjoying.
 
 ## How we built it
----
+
 * The whole game consists of 2 components, the frontend and the backend.
 * All of the operations happen in real-time and asynchronously.
 * The backend has been built with Node.js and express.js and communicating with frontend via web sockets . This component listens to different events and responds accordingly.
