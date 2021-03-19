@@ -32,7 +32,7 @@ const Game: React.VFC<GameProps> = ({
 }) => {
   const [description, setDescription] = useState<string>("");
   const [outcome, setOutcome] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
 
   const [isChallenge, setIsChallenge] = useState<boolean>(false);
   const [isDice, setIsDice] = useState<boolean>(false);
@@ -69,7 +69,7 @@ const Game: React.VFC<GameProps> = ({
     socket.on("positionupdated", ({ playerId, position }: any) => {
       if (currentPlayerId === playerId) {
         const { category }: { category: string } = board.fields[position];
-        setCategory(category);
+        setTitle(category);
         Object.entries(challenges).forEach(([key, categoryChallenges]) => {
           if (key === category) {
             const challengeIndex = getRandomInt(
@@ -105,7 +105,7 @@ const Game: React.VFC<GameProps> = ({
               outcome={outcome}
               color="green"
               onClose={nextPlayer}
-              title={category}
+              title={title}
             />
           )}
           {isDice && <Dice resultCallback={processDiceResult} />}
