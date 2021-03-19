@@ -9,24 +9,29 @@ import { IBoard } from "../../hooks/useBoard";
 import { Player } from "../../models/player";
 import { socket } from "../../utils/socket";
 
+import challenges from "../../assets/challenges.json";
+
+function getRandomInt(min: number, max: number) {
+  const minInt = Math.ceil(min);
+  const maxInt = Math.floor(max);
+  return Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
+}
+
 interface GameProps {
   players: Player[];
   board: IBoard;
   currentPlayerId: string;
   code: string;
-  moveplayer: (id: string, amount: number) => boolean;
 }
 
 const Game: React.VFC<GameProps> = ({
   players,
   board,
-  moveplayer,
   currentPlayerId,
   code,
 }) => {
-  const description =
-    "Never have I ever used a fake ID to get into a party or buy drinks";
-  const outcome = "Take 2 sips if you have";
+  const [description, setDescription] = useState<string>("");
+  const [outcome, setOutcome] = useState<string>("");
 
   const [isChallenge, setIsChallenge] = useState<boolean>(false);
   const [isDice, setIsDice] = useState<boolean>(false);
@@ -44,22 +49,37 @@ const Game: React.VFC<GameProps> = ({
     socket.emit("chooseplayer", { code });
     setIsChallenge(false);
   };
-  const doSomething: () => void = () => {
-    moveplayer(players[0].playerId, 1);
+
+  const currentPlayerName = () => {
+    const currentPlayer = players.find(
+      (player) => player.playerId === currentPlayerId
+    );
+    if (!currentPlayer) return "undefined";
+    return currentPlayer.nickName;
   };
 
   useEffect(() => {
     socket.on("chooseplayer", (player: any) => {
-      console.table(player);
       if (player.playerId === currentPlayerId) {
         setIsDice(true);
-      } else {
-        console.table(`${player}`);
       }
     });
 
-    socket.on("positionupdated", (playerId: any) => {
+    socket.on("positionupdated", ({ playerId, position }: any) => {
       if (currentPlayerId === playerId) {
+        const { category }: { category: string } = board.fields[position];
+
+        Object.entries(challenges).forEach(([key, categoryChallenges]) => {
+          if (key === category) {
+            const challengeIndex = getRandomInt(
+              0,
+              categoryChallenges.length - 1
+            );
+            setDescription(categoryChallenges[challengeIndex].description);
+            setOutcome(categoryChallenges[challengeIndex].outcome);
+          }
+        });
+
         setIsChallenge(true);
       }
     });
@@ -72,34 +92,8 @@ const Game: React.VFC<GameProps> = ({
           isChallenge || isDice ? "game challenge-active" : ""
         }`}
       >
-        <Header color="default" title="Hello" secondary="bye" />
+        <Header color="default" title={currentPlayerName()} />
         <Board fields={board.fields} />
-
-        <div className="temp-button-container">
-          <button type="button" onClick={doSomething} className="temp-button">
-            Log players
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              setIsChallenge(true);
-            }}
-            className="temp-button"
-          >
-            Open Challenge
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              setIsDice(true);
-            }}
-            className="temp-button"
-          >
-            Roll Dice
-          </button>
-        </div>
       </div>
 
       {(isChallenge || isDice) && (

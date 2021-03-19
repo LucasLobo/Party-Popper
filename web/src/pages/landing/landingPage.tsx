@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useHistory } from "react-router-dom";
 import CircleAvatar from "../../components/circleAvatar/circleAvatar";
 import Button from "../../components/button/Button";

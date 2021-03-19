@@ -12,7 +12,6 @@ interface JoinProps {
   nickname: string;
   gameCode: string;
   setGameCode: Dispatch<SetStateAction<string>>;
-  isOwner: boolean;
   setIsOwner: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -21,7 +20,6 @@ const JoinPage: React.VFC<JoinProps> = ({
   nickname,
   gameCode,
   setGameCode,
-  isOwner,
   setIsOwner,
 }) => {
   const history = useHistory();

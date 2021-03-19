@@ -15,7 +15,7 @@ const App: React.VFC = () => {
   const [nickname, setNickame] = useState("");
   const [avatar, nextAvatar] = useAvatar();
   const [code, setCode] = useState("");
-  const [board, players, movePlayer, makeBoard] = useBoard();
+  const [board, players, makeBoard] = useBoard();
   const [isOwner, setIsOwner] = useState(false);
   const [playerId, setPlayerId] = useState("");
 
@@ -64,7 +64,6 @@ const App: React.VFC = () => {
             avatar={avatar}
             gameCode={code}
             setGameCode={setCode}
-            isOwner={isOwner}
             setIsOwner={setIsOwner}
           />
         </Route>
@@ -82,9 +81,8 @@ const App: React.VFC = () => {
         <Route path="/game">
           <Game
             board={board}
-            players={players}
-            moveplayer={movePlayer}
             currentPlayerId={playerId}
+            players={players}
             code={code}
           />
         </Route>

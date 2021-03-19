@@ -94,10 +94,10 @@ export class IoEvents {
       console.log("UPDATEPOSITION", playerId, code, amount);
       const players = this.gameState.getGamePlayers(code);
 
-      playGame.movePlayer(playerId, amount, players, code);
+      const position = playGame.movePlayer(playerId, amount, players, code);
 
       this.io.to(code).emit(SockeType.JOINROOM, players);
-      this.io.to(code).emit("positionupdated", playerId);
+      this.io.to(code).emit("positionupdated", {playerId, position});
     });
 
     this.socket.on("chooseplayer", ({ code }) => {

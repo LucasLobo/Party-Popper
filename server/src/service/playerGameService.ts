@@ -36,12 +36,13 @@ export class PlayGameService {
     if (
       player === undefined ||
       player.position + amount >= this.gameState.board(code).length
-    )
-      return false;
+    ) {
+      return -1;
+    }
 
     const position = player.position + amount;
     player.position = position;
-    return true;
+    return position;
   };
 
   public generateboard(length: number = 25): Field[] {

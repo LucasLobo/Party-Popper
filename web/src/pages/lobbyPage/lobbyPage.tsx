@@ -40,7 +40,7 @@ const LobbyPage: React.VFC<LobbyPageProps> = ({
     history.push("/game");
   };
 
-  socket.on(SocketType.GAMESTARTED, (arg: any) => {
+  socket.on(SocketType.GAMESTARTED, () => {
     history.push("/game");
   });
 
