@@ -11,6 +11,7 @@ const httpServer = http.createServer(app);
 const io = new Server(httpServer);
 io.setMaxListeners(200);
 
+// add cors support
 app.use(cors());
 
 io.on(SockeType.CONNECTION, (socket: Socket) => {
