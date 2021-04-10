@@ -1,5 +1,8 @@
 import socketIOClient from "socket.io-client";
 
-export const socket = socketIOClient("http://localhost:8000", {
-  transports: ["websocket"],
-});
+export const socket = socketIOClient(
+  "https://party-popper-backend.herokuapp.com/",
+  {
+    transports: ["websocket"],
+  }
+);
