@@ -35,6 +35,38 @@
       "outcome": "Drink 2 sips if you get it wrong"
     },
     {
+      "description": "What is the Italian word for pie?",
+      "outcome": "give out 2 sips if you succeed, drink 4 otherwise"
+    },
+    {
+      "description": "What Is It Called When A Bottle Of Champagne Is Open With A Sword?",
+      "outcome": "Drink 3 sips if you get it wrong"
+    },
+    {
+      "description": "What Was The First Toy To Be Advertised On Television?",
+      "outcome": "Drink 4 sips if you get it wrong"
+    },
+    {
+      "description": "Who Invented The Word Vomit?",
+      "outcome": "Drink your whole cup if you get it wrong"
+    },
+    {
+      "description": "What’s The Total Number Of Dots On A Pair Of Dice?",
+      "outcome": "Drink 1 sips if you get it wrong"
+    },
+    {
+      "description": "How Many Valves Does A Trumpet Have?",
+      "outcome": "Drink 4 sips if you get it wrong"
+    },
+    {
+      "description": "Where Is The Bermuda Triangle Situated?",
+      "outcome": "give out 2 sips if you succeed, drink 3 otherwise"
+    },
+    {
+      "description": "How Do You Say “Merry Christmas” In Spanish?",
+      "outcome": "Drink 2 sips if you get it wrong"
+    },
+    {
       "description": "How many legs does a spider have?",
       "outcome": "Drink 3 sips if you get it wrong"
     }
