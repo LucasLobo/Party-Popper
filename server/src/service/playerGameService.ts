@@ -51,8 +51,18 @@ export class PlayGameService {
     board.push(start);
     const finish = new Field(length, "finish", "finish");
     for (let i = 1; i < length; i += 1) {
-      const colorIndex = getRandomInt(0, colors.length - 1);
-      const categoryIndex = getRandomInt(0, categories.length - 1);
+      let colorIndex = getRandomInt(0, colors.length - 1);
+
+      while (colors[colorIndex] === board[i - 1].color) {
+        colorIndex = getRandomInt(0, colors.length - 1);
+      }
+
+      let categoryIndex = getRandomInt(0, categories.length - 1);
+
+      while (categories[categoryIndex] === board[i - 1].category) {
+        categoryIndex = getRandomInt(0, colors.length - 1);
+      }
+
       const field = new Field(i, colors[colorIndex], categories[categoryIndex]);
       board.push(field);
     }
