@@ -3,7 +3,7 @@
 
 ## Note
 
-The front-end has been developed as a mobile prototype, and it is meant to be viewd using a mobile view. It was not optimized for desktop (mobile first approach). This application is a proof of concept and is not ready for production.
+The front-end has been developed as a mobile prototype, and it is meant to be viewed using a mobile view. It was not optimized for desktop (mobile first approach). This application is a proof of concept and is not ready for production.
 
 ## Screenshots
 
